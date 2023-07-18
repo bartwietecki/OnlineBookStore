@@ -29,12 +29,10 @@ public class Book {
 
     private LocalDateTime createDate;
 
-    // TODO implementation of Category entity
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
 
-    // TODO implementation of Author entity
     @ManyToOne
     @JoinColumn(name = "author_id")
     private Author author;
