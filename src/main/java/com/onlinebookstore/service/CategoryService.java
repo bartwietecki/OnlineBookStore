@@ -1,0 +1,38 @@
+package com.onlinebookstore.service;
+
+import com.onlinebookstore.entity.Category;
+import com.onlinebookstore.repository.CategoryRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class CategoryService {
+
+    private final CategoryRepository categoryRepository;
+
+
+    public CategoryService(CategoryRepository categoryRepository) {
+        this.categoryRepository = categoryRepository;
+    }
+
+    public Category addCategory(Category category) {
+        return categoryRepository.save(category);
+    }
+
+    public Category getCategoryByName(String name) {
+        return categoryRepository.findByName(name);
+    }
+
+    public List<Category> getAllCategories() {
+        return categoryRepository.findAll();
+    }
+
+    public Category updateCategory(Category category) {
+        return categoryRepository.save(category);
+    }
+
+    public void deleteCategory(Long categoryId) {
+        categoryRepository.deleteById(categoryId);
+    }
+}
