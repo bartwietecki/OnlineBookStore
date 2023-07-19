@@ -1,26 +1,41 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <title>Books List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0/css/bootstrap.min.css">
 </head>
 <body>
-<h1>Books List</h1>
-<table>
-    <thead>
-    <tr>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Price</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="book : ${books}">
-        <td th:text="${book.title}"></td>
-        <td th:text="${book.description}"></td>
-        <td th:text="${book.price}"></td>
-    </tr>
-    </tbody>
-</table>
+<div class="container">
+    <h1>Books List</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Image</th>
+            <th>Created Date</th>
+            <th>Category</th>
+            <th>Author</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book : ${books}">
+            <td th:text="${book.id}"></td>
+            <td th:text="${book.title}"></td>
+            <td th:text="${book.description}"></td>
+            <td th:text="${book.price}"></td>
+            <td>
+                <img th:src="@{'/images/' + ${book.imageName}}" alt="Book Image" width="100">
+            </td>
+            <td th:text="${book.createDate}"></td>
+            <td th:text="${book.category.name}"></td>
+            <td th:text="${book.author.name}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>
