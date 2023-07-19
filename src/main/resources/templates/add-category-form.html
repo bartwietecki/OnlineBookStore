@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Category</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+  <h1>Add Category</h1>
+  <form th:action="@{/admin/category/add}" th:object="${categoryModel}" method="post">
+    <div class="form-group">
+      <label for="name">Category Name</label>
+      <input type="text" class="form-control" id="name" th:field="*{name}" required>
+    </div>
+    <div class="form-group">
+      <label for="parentId">Parent Category ID</label>
+      <input type="number" class="form-control" id="parentId" th:field="*{parentId}">
+    </div>
+    <button type="submit" class="btn btn-primary">Add Category</button>
+  </form>
+</div>
+</body>
+</html>
