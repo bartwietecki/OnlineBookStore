@@ -1,6 +1,7 @@
 package com.onlinebookstore.service;
 
 import com.onlinebookstore.entity.Category;
+import com.onlinebookstore.model.CategoryModel;
 import com.onlinebookstore.repository.CategoryRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,10 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
-    public Category addCategory(Category category) {
+    public Category addCategory(CategoryModel categoryModel) {
+        Category category = new Category();
+        category.setName(categoryModel.getName());
+
         return categoryRepository.save(category);
     }
 
@@ -28,7 +32,6 @@ public class CategoryService {
         return categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new IllegalArgumentException("Category with id " + categoryId + " not found"));
     }
-
 
     public List<Category> getAllCategories() {
         return categoryRepository.findAll();
