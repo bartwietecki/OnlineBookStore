@@ -5,5 +5,4 @@ import lombok.Data;
 @Data
 public class CategoryModel {
     private String name;
-    private String parentName;
 }
