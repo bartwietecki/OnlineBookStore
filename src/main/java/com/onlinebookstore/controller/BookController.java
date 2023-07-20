@@ -59,26 +59,6 @@ public class BookController {
         return "add-book-form";
     }
 
-//    @PostMapping("/save")
-//    public String addBook(@ModelAttribute BookModel bookModel) {
-//        Category category = categoryService.getCategoryById(bookModel.getCategoryId());
-//
-//        Author author = authorService.getAuthorById(bookModel.getAuthorId());
-//
-//        Book book = new Book();
-//        book.setTitle(bookModel.getTitle());
-//        book.setDescription(bookModel.getDescription());
-//        book.setPrice(bookModel.getPrice());
-//        book.setImageName(bookModel.getImageName());
-//        book.setCreateDate(LocalDateTime.now());
-//        book.setCategory(category);
-//        book.setAuthor(author);
-//
-//        bookService.addBook(book);
-//
-//        return "redirect:/books/add";
-//    }
-
     @PostMapping("/save")
     public String addBook(@ModelAttribute BookModel bookModel,
                           @RequestParam("categoryId") Long categoryId,
