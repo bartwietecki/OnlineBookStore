@@ -1,6 +1,7 @@
 package com.onlinebookstore.controller;
 
 import com.onlinebookstore.entity.Book;
+import com.onlinebookstore.model.BookModel;
 import com.onlinebookstore.service.BookService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,18 +21,24 @@ public class BookController {
         this.bookService = bookService;
     }
 
+//    @GetMapping
+//    public String getBooks(Model model) {
+//        List<Book> books = bookService.getAllBooks();
+//        model.addAttribute("books", books);
+//        return "book-list";
+//    }
+
     @GetMapping
     public String getBooks(Model model) {
-        List<Book> books = bookService.getAllBooks();
-        model.addAttribute("books", books);
+        List<BookModel> bookModels = bookService.getAllBookModels();
+        model.addAttribute("books", bookModels);
         return "book-list";
     }
 
     @GetMapping("/category/{categoryName}")
     public String getBooksByCategory(@PathVariable String categoryName, Model model) {
-        List<Book> books = bookService.getBookByCategory(categoryName);
-        model.addAttribute("books", books);
+        List<BookModel> bookModels = bookService.getBookModelsByCategory(categoryName);
+        model.addAttribute("books", bookModels);
         return "book-list";
     }
-
 }
