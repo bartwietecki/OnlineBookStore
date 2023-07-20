@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <title>Add Book Form</title>
+</head>
+<body>
+<div class="container mt-4">
+  <h2 class="mb-3">Add Book</h2>
+  <form th:action="@{/books/save}" th:object="${bookModel}" method="post">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" class="form-control" id="title" th:field="*{title}" required>
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea class="form-control" id="description" th:field="*{description}" required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="price">Price</label>
+      <input type="number" class="form-control" id="price" th:field="*{bookModel.price}" required>
+<!--    </div>-->
+<!--    <div class="form-group">-->
+<!--      <label for="price">Price:</label>-->
+<!--      <input type="number" step="0.01" class="form-control" id="price" th:field="${bookModel.price}" required>-->
+<!--    </div>-->
+    <div class="form-group">
+      <label for="imageName">Image Name</label>
+      <input type="text" class="form-control" id="imageName" th:field="*{imageName}" required>
+    </div>
+    <div class="form-group">
+      <label for="categoryId">Category</label>
+      <select class="form-control" id="categoryId" th:field="*{categoryId}" required>
+        <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="authorId">Author</label>
+      <select class="form-control" id="authorId" th:field="*{authorId}" required>
+        <option th:each="author : ${authors}" th:value="${author.id}" th:text="${author.name + ' ' + author.surname}"></option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Book</button>
+  </form>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

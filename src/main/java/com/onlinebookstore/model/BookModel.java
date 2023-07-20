@@ -11,4 +11,6 @@ public class BookModel {
     private String description;
     private BigDecimal price;
     private String imageName;
+    private Long categoryId;
+    private Long authorId;
 }
