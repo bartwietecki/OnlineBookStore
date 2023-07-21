@@ -31,11 +31,16 @@
                 <img th:src="@{'/images/' + ${book.imageName}}" alt="Book Image" width="100">
             </td>
             <td th:text="${book.createDate}"></td>
-            <td th:text="${book.category.name}"></td>
-            <td th:text="${book.author.name}"></td>
+
+<!--            // TODO KIEDY MAMY BOOK CATEGORY NAME / ID LUB AUTOR , SYPIE SIĘ 500 ERROR WHITELABEL-->
+<!--            <td th:text="${book.category.name}"></td>-->
+<!--            <td th:text="${book.category.id}"></td>-->
+<!--            <td th:text="${book.author.name}"></td>-->
+
         </tr>
         </tbody>
     </table>
 </div>
 </body>
 </html>
+

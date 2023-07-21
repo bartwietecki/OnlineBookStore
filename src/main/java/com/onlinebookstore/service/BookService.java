@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class BookService {
@@ -31,10 +32,14 @@ public class BookService {
 //        return bookRepository.findAll();
 //    }
     
-    public List<BookModel> getAllBookModels() {
+    public List<BookModel> getAllBooks() {
         List<Book> books = bookRepository.findAll();
         return convertToBookModels(books);
+//        return books.stream()
+//                .map(this::mapBookToBookModel)
+//                .collect(Collectors.toList());
     }
+
 
 //    public Book getBookById(Long bookId) throws IllegalArgumentException {
 //        return bookRepository.findById(bookId)
@@ -113,5 +118,18 @@ public class BookService {
         book.setAuthor(author);
 
         bookRepository.save(book);
+    }
+
+    private BookModel mapBookToBookModel(Book book) {
+        BookModel bookModel = new BookModel();
+        bookModel.setId(book.getId());
+        bookModel.setTitle(book.getTitle());
+        bookModel.setDescription(book.getDescription());
+        bookModel.setPrice(book.getPrice());
+        bookModel.setImageName(book.getImageName());
+        bookModel.setCategoryId(book.getCategory().getId());
+        bookModel.setAuthorId(book.getAuthor().getId());
+        bookModel.setCreateDate(book.getCreateDate()); // Przypisz datę utworzenia
+        return bookModel;
     }
 }

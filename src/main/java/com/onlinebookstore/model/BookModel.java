@@ -1,8 +1,10 @@
 package com.onlinebookstore.model;
 
+import com.onlinebookstore.entity.Author;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Data
 public class BookModel {
@@ -11,6 +13,7 @@ public class BookModel {
     private String description;
     private BigDecimal price;
     private String imageName;
+    private LocalDateTime createDate;
     private Long categoryId;
     private Long authorId;
 }

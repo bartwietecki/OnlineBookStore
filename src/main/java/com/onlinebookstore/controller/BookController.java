@@ -37,7 +37,7 @@ public class BookController {
 
     @GetMapping
     public String getBooks(Model model) {
-        List<BookModel> bookModels = bookService.getAllBookModels();
+        List<BookModel> bookModels = bookService.getAllBooks();
         model.addAttribute("books", bookModels);
         return "book-list";
     }
