@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "book")
 public class Book {
 
     @Id
@@ -20,20 +19,19 @@ public class Book {
     private Long id;
 
     private String title;
-
     private String description;
-
     private BigDecimal price;
-
     private String imageName;
-
     private LocalDateTime createDate;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
 
+    // TODO czy relacja jest prawidłowa?
     @ManyToOne
     @JoinColumn(name = "author_id")
     private Author author;
 }
+
+

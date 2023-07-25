@@ -24,6 +24,15 @@ public class CategoryService {
         return categoryRepository.save(category);
     }
 
+    public List<Category> getAllCategories() {
+        return categoryRepository.findAll();
+    }
+
+
+
+
+
+
     public Category getCategoryByName(String name) {
         return categoryRepository.findByName(name);
     }
@@ -31,10 +40,6 @@ public class CategoryService {
     public Category getCategoryById(Long categoryId) {
         return categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new IllegalArgumentException("Category with id " + categoryId + " not found"));
-    }
-
-    public List<Category> getAllCategories() {
-        return categoryRepository.findAll();
     }
 
     public Category updateCategory(Category category) {

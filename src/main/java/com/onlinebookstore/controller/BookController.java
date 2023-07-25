@@ -1,17 +1,16 @@
 package com.onlinebookstore.controller;
 
 import com.onlinebookstore.entity.Author;
-import com.onlinebookstore.entity.Book;
 import com.onlinebookstore.entity.Category;
 import com.onlinebookstore.model.BookModel;
 import com.onlinebookstore.service.AuthorService;
 import com.onlinebookstore.service.BookService;
 import com.onlinebookstore.service.CategoryService;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -28,17 +27,24 @@ public class BookController {
         this.authorService = authorService;
     }
 
-    //    @GetMapping
+    // użycie BookModel zamiast Book - wywołanie książek bez paginacji
+
+//    @GetMapping
 //    public String getBooks(Model model) {
-//        List<Book> books = bookService.getAllBooks();
-//        model.addAttribute("books", books);
+//        List<BookModel> bookModels = bookService.getAllBooks();
+//        model.addAttribute("books", bookModels);
 //        return "book-list";
 //    }
 
+                    // metoda wywołania książek z paginacją
     @GetMapping
-    public String getBooks(Model model) {
-        List<BookModel> bookModels = bookService.getAllBooks();
-        model.addAttribute("books", bookModels);
+    public String getBooks(@RequestParam(defaultValue = "0") int page,
+                           @RequestParam(defaultValue = "9") int size,
+                           Model model) {
+        Page<BookModel> pagedBooks = bookService.getAllBooksPaged(page, size);
+
+        model.addAttribute("pagedBooks", pagedBooks);
+
         return "book-list";
     }
 
@@ -63,11 +69,10 @@ public class BookController {
     public String addBook(@ModelAttribute BookModel bookModel,
                           @RequestParam("categoryId") Long categoryId,
                           @RequestParam("authorId") Long authorId) {
-        Category category = categoryService.getCategoryById(categoryId);
-        Author author = authorService.getAuthorById(authorId);
 
         bookService.addBook(bookModel, categoryId, authorId);
 
         return "redirect:/books/add";
     }
+
 }

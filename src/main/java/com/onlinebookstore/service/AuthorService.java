@@ -26,9 +26,4 @@ public class AuthorService {
         author.setSurname(authorModel.getSurname());
         return authorRepository.save(author);
     }
-
-    public Author getAuthorById(Long authorId) {
-        return authorRepository.findById(authorId)
-                .orElseThrow(() -> new IllegalArgumentException("Author with id " + authorId + " not found"));
-    }
 }
