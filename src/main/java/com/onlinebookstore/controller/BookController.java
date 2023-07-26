@@ -75,6 +75,18 @@ public class BookController {
         return "redirect:/books/add";
     }
 
+    @GetMapping("/details/{bookId}")
+    public String viewBookDetails(@PathVariable("bookId") Long bookId, Model model) {
+        // Pobierz książkę o podanym identyfikatorze z serwisu
+        BookModel bookModel = bookService.getBookById(bookId);
+
+        // Dodaj książkę do modelu, aby była dostępna w widoku
+        model.addAttribute("book", bookModel);
+
+        // Zwróć nazwę widoku dla strony z detalami książki
+        return "book-details";
+    }
+
 }
 
 

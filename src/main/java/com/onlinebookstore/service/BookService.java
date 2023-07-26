@@ -82,6 +82,13 @@ public class BookService {
         bookRepository.save(book);
     }
 
+    public BookModel getBookById(Long bookId) {
+        Book book = bookRepository.findById(bookId)
+                .orElseThrow(() -> new IllegalArgumentException("Book with id " + bookId + " not found"));
+
+        return mapBookToBookModel(book);
+    }
+
     private BookModel mapBookToBookModel(Book book) {
         BookModel bookModel = new BookModel();
         bookModel.setId(book.getId());
