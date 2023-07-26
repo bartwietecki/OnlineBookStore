@@ -36,7 +36,7 @@ public class BookController {
 //        return "book-list";
 //    }
 
-                    // metoda wywołania książek z paginacją
+    // metoda wywołania książek z paginacją
     @GetMapping
     public String getBooks(@RequestParam(defaultValue = "0") int page,
                            @RequestParam(defaultValue = "9") int size,
@@ -76,3 +76,6 @@ public class BookController {
     }
 
 }
+
+
+

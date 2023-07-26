@@ -28,11 +28,6 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
 
-
-
-
-
-
     public Category getCategoryByName(String name) {
         return categoryRepository.findByName(name);
     }

@@ -7,11 +7,15 @@ import com.onlinebookstore.model.BookModel;
 import com.onlinebookstore.repository.AuthorRepository;
 import com.onlinebookstore.repository.BookRepository;
 import com.onlinebookstore.repository.CategoryRepository;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.time.LocalDateTime;
 import java.util.List;
