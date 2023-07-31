@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/books")
@@ -37,17 +36,17 @@ public class BookController {
 //        return "book-list";
 //    }
 
-    // metoda wywołania książek z paginacją
-    @GetMapping
-    public String getBooks(@RequestParam(defaultValue = "0") int page,
-                           @RequestParam(defaultValue = "9") int size,
-                           Model model) {
-        Page<BookModel> pagedBooks = bookService.getAllBooksPaged(page, size);
-
-        model.addAttribute("pagedBooks", pagedBooks);
-
-        return "book-list";
-    }
+//     metoda wywołania książek z paginacją
+//    @GetMapping
+//    public String getBooks(@RequestParam(defaultValue = "0") int page,
+//                           @RequestParam(defaultValue = "9") int size,
+//                           Model model) {
+//        Page<BookModel> pagedBooks = bookService.getAllBooksPaged(page, size);
+//
+//        model.addAttribute("pagedBooks", pagedBooks);
+//
+//        return "book-list";
+//    }
 
     @GetMapping("/category/{categoryName}")
     public String getBooksByCategory(@PathVariable String categoryName, Model model) {
@@ -76,35 +75,50 @@ public class BookController {
         return "redirect:/books/add";
     }
 
-
-    // BOOK DETAILS HERE
-
-//    @GetMapping("/details/{bookId}")
-//    public String viewBookDetails(@PathVariable("bookId") Long bookId, Model model) {
-//        // Pobierz książkę o podanym identyfikatorze z serwisu
-//        BookModel bookModel = bookService.getBookById(bookId);
-//
-//        // Dodaj książkę do modelu, aby była dostępna w widoku
-//        model.addAttribute("book", bookModel);
-//
-//        // Zwróć nazwę widoku dla strony z detalami książki
-//        return "book-details";
-//    }
-
-    @GetMapping("/details/{bookId}")
+        @GetMapping("/details/{bookId}")
     public String viewBookDetails(@PathVariable("bookId") Long bookId, Model model) {
-        Map<String, Object> bookData = bookService.getBookById(bookId);
-
-        BookModel bookModel = (BookModel) bookData.get("book");
-        String categoryName = (String) bookData.get("categoryName");
-        String authorName = (String) bookData.get("authorName");
+        // get Book by id from service
+        BookModel bookModel = bookService.getBookById(bookId);
 
         model.addAttribute("book", bookModel);
-        model.addAttribute("categoryName", categoryName);
-        model.addAttribute("authorName", authorName);
 
         return "book-details";
     }
+
+
+    // PAGINATION + AJAX SEARCH FUNCTIONALITY
+
+//    @GetMapping
+//    public String getBooks(@RequestParam(defaultValue = "0") int page,
+//                           @RequestParam(defaultValue = "9") int size,
+//                           Model model, String keyword) {
+//        Page<BookModel> pagedBooks = bookService.getAllBooksPaged(page, size);
+//
+//        if(keyword != null) {
+//            model.addAttribute("pagedBooks", bookService.getBooksByKeyword(keyword));
+//        } else {
+//            model.addAttribute("pagedBooks", pagedBooks);
+//        }
+//
+//        return "book-list";
+//    }
+
+    @GetMapping
+    public String getBooks(@RequestParam(defaultValue = "0") int page,
+                           @RequestParam(defaultValue = "9") int size,
+                           @RequestParam(required = false) String keyword,
+                           Model model) {
+
+        if(keyword != null && !keyword.isEmpty()) {
+            model.addAttribute("pagedBooks", bookService.getBooksByKeyword(keyword));
+        } else {
+            Page<BookModel> pagedBooks = bookService.getAllBooksPaged(page, size);
+            model.addAttribute("pagedBooks", pagedBooks);
+        }
+
+        return "book-list";
+    }
+
 
 }
 

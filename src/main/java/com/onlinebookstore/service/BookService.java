@@ -18,10 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -85,45 +82,6 @@ public class BookService {
         bookRepository.save(book);
     }
 
-
-    // BOOK DETAILS HERE
-
-
-//    public BookModel getBookById(Long bookId) {
-//        Book book = bookRepository.findById(bookId)
-//                .orElseThrow(() -> new IllegalArgumentException("Book with id " + bookId + " not found"));
-//
-//        return mapBookToBookModel(book);
-//    }
-
-    public Map<String, Object> getBookById(Long bookId) {
-        Optional<Book> bookOptional = bookRepository.findById(bookId);
-        Map<String, Object> result = new HashMap<>();
-
-        if (bookOptional.isPresent()) {
-            Book book = bookOptional.get();
-            BookModel bookModel = mapBookToBookModel(book);
-            result.put("book", bookModel);
-
-            String categoryName = categoryRepository.findById(book.getCategory().getId())
-                    .map(Category::getName)
-                    .orElse("Unknown Category");
-            result.put("categoryName", categoryName);
-
-            String authorName = authorRepository.findById(book.getAuthor().getId())
-                    .map(Author::getName)
-                    .orElse("Unknown Author");
-            result.put("authorName", authorName);
-        } else {
-            // here I can handle the situation when the book with the given id was not found
-            result.put("book", null);
-            result.put("categoryName", "Unknown Category");
-            result.put("authorName", "Unknown Author");
-        }
-
-        return result;
-    }
-
     private BookModel mapBookToBookModel(Book book) {
         BookModel bookModel = new BookModel();
         bookModel.setId(book.getId());
@@ -136,5 +94,20 @@ public class BookService {
         bookModel.setCreateDate(book.getCreateDate()); // Przypisz datę utworzenia
         return bookModel;
     }
+
+    public BookModel getBookById(Long bookId) {
+        Book book = bookRepository.findById(bookId)
+                .orElseThrow(() -> new IllegalArgumentException("Book with id " + bookId + " not found"));
+
+        return mapBookToBookModel(book);
+    }
+
+
+    // AJAX SEARCH
+    public List<BookModel> getBooksByKeyword(String keyword) {
+        List<Book> books = bookRepository.findByKeyword(keyword);
+        return books.stream().map(this::mapBookToBookModel).collect(Collectors.toList());
+    }
+
 
 }
