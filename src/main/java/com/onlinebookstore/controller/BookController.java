@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/books")
@@ -75,15 +76,15 @@ public class BookController {
         return "redirect:/books/add";
     }
 
-        @GetMapping("/details/{bookId}")
-    public String viewBookDetails(@PathVariable("bookId") Long bookId, Model model) {
-        // get Book by id from service
-        BookModel bookModel = bookService.getBookById(bookId);
-
-        model.addAttribute("book", bookModel);
-
-        return "book-details";
-    }
+//        @GetMapping("/details/{bookId}")
+//    public String viewBookDetails(@PathVariable("bookId") Long bookId, Model model) {
+//        // get Book by id from service
+//        BookModel bookModel = bookService.getBookById(bookId);
+//
+//        model.addAttribute("book", bookModel);
+//
+//        return "book-details";
+//    }
 
 
     // PAGINATION + AJAX SEARCH FUNCTIONALITY
@@ -117,6 +118,21 @@ public class BookController {
         }
 
         return "book-list";
+    }
+
+    @GetMapping("/details/{bookId}")
+    public String viewBookDetails(@PathVariable("bookId") Long bookId, Model model) {
+        Map<String, Object> bookData = bookService.getBookById(bookId);
+
+        BookModel bookModel = (BookModel) bookData.get("book");
+        String categoryName = (String) bookData.get("categoryName");
+        String authorName = (String) bookData.get("authorName");
+
+        model.addAttribute("book", bookModel);
+        model.addAttribute("categoryName", categoryName);
+        model.addAttribute("authorName", authorName);
+
+        return "book-details";
     }
 
 
