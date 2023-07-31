@@ -110,8 +110,13 @@ public class BookController {
                            @RequestParam(required = false) String keyword,
                            Model model) {
 
+        int pageNumber = page > 0 ? page - 1 : page;
+        int pageSize = size;
+
         if(keyword != null && !keyword.isEmpty()) {
-            model.addAttribute("pagedBooks", bookService.getBooksByKeyword(keyword));
+            Page<BookModel> pagedBooks = bookService.getBooksByKeyword(keyword, pageNumber, pageSize);
+            model.addAttribute("pagedBooks", pagedBooks);
+            model.addAttribute("keyword", keyword);
         } else {
             Page<BookModel> pagedBooks = bookService.getAllBooksPaged(page, size);
             model.addAttribute("pagedBooks", pagedBooks);

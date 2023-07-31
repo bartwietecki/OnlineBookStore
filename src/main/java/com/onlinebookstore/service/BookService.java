@@ -107,9 +107,20 @@ public class BookService {
 
 
     // AJAX SEARCH
-    public List<BookModel> getBooksByKeyword(String keyword) {
-        List<Book> books = bookRepository.findByKeyword(keyword);
-        return books.stream().map(this::mapBookToBookModel).collect(Collectors.toList());
+//    public List<BookModel> getBooksByKeyword(String keyword) {
+//        List<Book> books = bookRepository.findByKeyword(keyword);
+//        return books.stream().map(this::mapBookToBookModel).collect(Collectors.toList());
+//    }
+
+    public Page<BookModel> getBooksByKeyword(String keyword, int pageNumber, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        Page<Book> bookPage = bookRepository.findByKeyword(keyword, pageable);
+
+        List<BookModel> bookModels = bookPage.getContent().stream()
+                .map(this::mapBookToBookModel)
+                .collect(Collectors.toList());
+
+        return new PageImpl<>(bookModels, pageable, bookPage.getTotalElements());
     }
 
     public Map<String, Object> getBookById(Long bookId) {
