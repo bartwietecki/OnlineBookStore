@@ -5,6 +5,7 @@
     <title>Online Book Store</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <style>
         /*.product-card{margin-bottom:25px}*/
         /*.product-image{max-height:400px;object-fit:cover}*/
@@ -129,18 +130,15 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <!--                <li class="nav-item">-->
-                <!--                    <a class="nav-link" href="#">Edit Account</a>-->
-                <!--                </li>-->
-                <!--                <li class="nav-item">-->
-                <!--                    <a class="nav-link" href="#">My Orders</a>-->
-                <!--                </li>-->
+<!--                                <li class="nav-item">-->
+<!--                                    <a class="nav-link" href="#">Edit Account</a>-->
+<!--                                </li>-->
+<!--                                <li class="nav-item">-->
+<!--                                    <a class="nav-link" href="#">My Orders</a>-->
+<!--                                </li>-->
                 <li class="nav-item">
                     <a class="nav-link" href="#">Cart <i class="fas fa-shopping-cart"></i></a>
                 </li>
-                <!--                <li class="nav-item">-->
-                <!--                    <a class="nav-link" href="#">Contact Us</a>-->
-                <!--                </li>-->
                 <li class="nav-item">
                     <a class="nav-link" href="#">Contact Us <i class="fas fa-phone-alt"></i></a>
                 </li>
@@ -149,16 +147,57 @@
     </div>
 </nav>
 
+
+
+
+<!-- SEARCH FOR PRODUCTS BUTTON WITHOUT AJAX SEARCH -->
+
+<!--<div class="container mt-3">-->
+<!--    <div class="row justify-content-end">-->
+<!--        <div class="col-auto">-->
+<!--            <form class="d-flex">-->
+<!--                <input class="form-control me-2" type="search" placeholder="Search products..." aria-label="Search">-->
+<!--                <button class="btn btn-outline-success" type="submit">Search</button>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+
+
+
+
+
+
+
+<!--AJAX SEARCH-->
+
+<!--<form th:action="@{/employees}" method="get">-->
+<!--    <input id="txtSearch" type="text" name="keyword">-->
+<!--    <button class="btn btn-outline-success" type="submit">Search</button>-->
+<!--</form>-->
+
 <div class="container mt-3">
     <div class="row justify-content-end">
         <div class="col-auto">
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search products..." aria-label="Search">
+            <form th:action="@{/books}" method="get">
+                <input id="txtSearch" type="text" name="keyword">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+<!--IMPLEMENTACJA KODU ODPOWIADAJĄCEGO ZA DETALE PRODUKTU-->
+<!-- Kod dla widoku book-list.html -->
 
 <!--<div class="container mt-3">-->
 <!--    <div class="row row-cols-1 row-cols-md-3 g-4">-->
@@ -169,8 +208,10 @@
 <!--                    <h5 class="card-title" th:text="${book.title}">Product Title</h5>-->
 <!--                    <p class="card-text" th:text="${book.price + ' zł'}">Product Price</p>-->
 <!--                    <form action="#" method="post">-->
-<!--                        <input type="hidden" name="productId" th:value="${book.id}" />-->
+<!--                        <input type="hidden" name="productId" th:value="${book.id}"/>-->
 <!--                        <button type="submit" class="btn btn-primary">Add to Cart</button>-->
+<!--                        &lt;!&ndash; Dodaj przycisk "Details" &ndash;&gt;-->
+<!--                        <a th:href="@{/books/details/{bookId}(bookId=${book.id})}" class="btn btn-secondary">Details</a>-->
 <!--                    </form>-->
 <!--                </div>-->
 <!--            </div>-->
@@ -178,13 +219,10 @@
 <!--    </div>-->
 <!--</div>-->
 
-
-<!--IMPLEMENTACJA KODU ODPOWIADAJĄCEGO ZA DETALE PRODUKTU-->
-
-<!-- Kod dla widoku book-list.html -->
 <div class="container mt-3">
     <div class="row row-cols-1 row-cols-md-3 g-4">
-        <div class="col" th:each="book : ${pagedBooks.content}">
+<!--        BRAK CONTENT przy pagedBooks-->
+        <div class="col" th:each="book : ${pagedBooks}">
             <div class="card product-card">
                 <img src="https://via.placeholder.com/200" class="card-img-top product-image" alt="Book Image">
                 <div class="card-body">
@@ -201,6 +239,8 @@
         </div>
     </div>
 </div>
+
+
 
 
 <nav aria-label="Page navigation">
