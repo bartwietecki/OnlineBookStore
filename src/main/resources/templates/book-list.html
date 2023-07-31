@@ -166,30 +166,36 @@
 
 
 
-
-
-
-
-<!--AJAX SEARCH-->
+<!--AJAX SEARCH BUTTON-->
 
 <!--<form th:action="@{/employees}" method="get">-->
 <!--    <input id="txtSearch" type="text" name="keyword">-->
 <!--    <button class="btn btn-outline-success" type="submit">Search</button>-->
 <!--</form>-->
 
+<!--<div class="container mt-3">-->
+<!--    <div class="row justify-content-end">-->
+<!--        <div class="col-auto">-->
+<!--            <form th:action="@{/books}" method="get">-->
+<!--                <input id="txtSearch" type="text" name="keyword">-->
+<!--                <button class="btn btn-outline-success" type="submit">Search</button>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+
 <div class="container mt-3">
     <div class="row justify-content-end">
         <div class="col-auto">
-            <form th:action="@{/books}" method="get">
-                <input id="txtSearch" type="text" name="keyword">
+            <form class="d-flex" method="get">
+                <label for="txtSearch" class="visually-hidden">Search books</label>
+                <input class="form-control me-2" id="txtSearch" type="search" placeholder="Search books..." name="keyword" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
         </div>
     </div>
 </div>
-
-
-
 
 
 
