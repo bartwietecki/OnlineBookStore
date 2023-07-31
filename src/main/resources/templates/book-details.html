@@ -172,7 +172,8 @@
     <a href="/books" class="back-btn">Back</a>
     <div class="book-details-container">
         <h1 class="book-title" th:text="${book.title}">Product Title</h1>
-        <p class="book-author" th:text="${authorName}">Product Author</p>
+<!--        <p class="book-author" th:text="${authorName}">Product Author</p>-->
+        <p class="book-author" th:text="${book.authorName + ' ' + book.authorSurname}">Product Author</p>
         <p class="book-category" th:text="${categoryName}">Product Category</p>
 
 <!--        <p class="book-category">Category: <span th:text="${book.categoryName}">Unknown Category</span></p>-->

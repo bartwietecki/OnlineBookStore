@@ -85,6 +85,21 @@ public class BookService {
         bookRepository.save(book);
     }
 
+//    private BookModel mapBookToBookModel(Book book) {
+//        BookModel bookModel = new BookModel();
+//        bookModel.setId(book.getId());
+//        bookModel.setTitle(book.getTitle());
+//        bookModel.setDescription(book.getDescription());
+//        bookModel.setPrice(book.getPrice());
+//        bookModel.setImageName(book.getImageName());
+//        bookModel.setCategoryId(book.getCategory().getId());
+//        bookModel.setAuthorId(book.getAuthor().getId());
+//        bookModel.setCreateDate(book.getCreateDate()); // Przypisz datę utworzenia
+//
+//        return bookModel;
+//    }
+
+    // adding additional author name and surname for book details
     private BookModel mapBookToBookModel(Book book) {
         BookModel bookModel = new BookModel();
         bookModel.setId(book.getId());
@@ -95,6 +110,16 @@ public class BookService {
         bookModel.setCategoryId(book.getCategory().getId());
         bookModel.setAuthorId(book.getAuthor().getId());
         bookModel.setCreateDate(book.getCreateDate()); // Przypisz datę utworzenia
+
+        bookModel.setCategoryName(book.getCategory().getName());
+
+        // Ustawienie imienia i nazwiska autora
+        Author author = book.getAuthor();
+        if (author != null) {
+            bookModel.setAuthorName(author.getName());
+            bookModel.setAuthorSurname(author.getSurname());
+        }
+
         return bookModel;
     }
 

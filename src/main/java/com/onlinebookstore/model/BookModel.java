@@ -18,4 +18,5 @@ public class BookModel {
     private Long authorId;
     private String categoryName; // added categoryName to display product category in details
     private String authorName; // added authorName to display product author in details
+    private String authorSurname; // added authorSurname to display product author in details
 }
