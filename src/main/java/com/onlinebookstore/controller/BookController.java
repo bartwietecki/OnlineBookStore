@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/books")
@@ -75,15 +76,33 @@ public class BookController {
         return "redirect:/books/add";
     }
 
+
+    // BOOK DETAILS HERE
+
+//    @GetMapping("/details/{bookId}")
+//    public String viewBookDetails(@PathVariable("bookId") Long bookId, Model model) {
+//        // Pobierz książkę o podanym identyfikatorze z serwisu
+//        BookModel bookModel = bookService.getBookById(bookId);
+//
+//        // Dodaj książkę do modelu, aby była dostępna w widoku
+//        model.addAttribute("book", bookModel);
+//
+//        // Zwróć nazwę widoku dla strony z detalami książki
+//        return "book-details";
+//    }
+
     @GetMapping("/details/{bookId}")
     public String viewBookDetails(@PathVariable("bookId") Long bookId, Model model) {
-        // Pobierz książkę o podanym identyfikatorze z serwisu
-        BookModel bookModel = bookService.getBookById(bookId);
+        Map<String, Object> bookData = bookService.getBookById(bookId);
 
-        // Dodaj książkę do modelu, aby była dostępna w widoku
+        BookModel bookModel = (BookModel) bookData.get("book");
+        String categoryName = (String) bookData.get("categoryName");
+        String authorName = (String) bookData.get("authorName");
+
         model.addAttribute("book", bookModel);
+        model.addAttribute("categoryName", categoryName);
+        model.addAttribute("authorName", authorName);
 
-        // Zwróć nazwę widoku dla strony z detalami książki
         return "book-details";
     }
 
