@@ -22,36 +22,34 @@ public class ShoppingCart {
     private int counter = 0;
     private BigDecimal totalCost;
 
-//    public void addToCart(BookModel bookModel) {
-//        if (books == null) {
-//            books = new ArrayList<>();
-//        }
-//        books.add(bookModel);
-//
-//        if (totalCost == null) {
-//            totalCost = new BigDecimal(0);
-//        }
-//        totalCost = totalCost.add(bookModel.getPrice());
-//    }
-    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    public void addToCart(Book book) {
+        if (cartBooks == null) {
+            cartBooks = new ArrayList<>();
+        }
 
-    public void addBook(Book book) {
         getCartBookByBook(book).ifPresentOrElse(
                 CartBook::increaseCounter,
-                () -> cartBooks.add(new CartBook(book))
-        );
+                () -> {
+                    CartBook cartBook = new CartBook(book);
+                    cartBooks.add(cartBook);
+                });
+
+        if (totalCost == null) {
+            totalCost = new BigDecimal(0);
+        }
+        totalCost = totalCost.add(book.getPrice());
+
         recalculatePriceAndCounter();
     }
 
-
     public void decreaseBook(Book book) {
         Optional<CartBook> oCartBook = getCartBookByBook(book);
-        if(oCartBook.isPresent()){
+        if (oCartBook.isPresent()) {
             CartBook cartBook = oCartBook.get();
             cartBook.decreaseCounter();
-            if(cartBook.hasZeroBooks()) {
+            if (cartBook.hasZeroBooks()) {
                 removeAllIBooks(book);
-            }else {
+            } else {
                 recalculatePriceAndCounter();
             }
         }

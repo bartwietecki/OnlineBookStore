@@ -1,7 +1,5 @@
 package com.onlinebookstore.cart;
 
-import com.onlinebookstore.model.AuthorModel;
-import com.onlinebookstore.model.BookModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

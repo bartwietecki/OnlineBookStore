@@ -27,7 +27,7 @@ public class CartService {
         if (oBook.isPresent()) {
             Book book = oBook.get();
             switch (itemOperation) {
-                case INCREASE -> shoppingCart.addBook(book);
+                case INCREASE -> shoppingCart.addToCart(book);
                 case DECREASE -> shoppingCart.decreaseBook(book);
                 case REMOVE -> shoppingCart.removeAllIBooks(book);
                 default -> throw new IllegalArgumentException();
