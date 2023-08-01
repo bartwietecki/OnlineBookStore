@@ -33,21 +33,6 @@ public class ShoppingCart {
 //        }
 //        totalCost = totalCost.add(bookModel.getPrice());
 //    }
-//
-//    public int getCartSize() {
-//        if (CollectionUtils.isEmpty(books)) {
-//            return 0;
-//        } else {
-//            return books.size();
-//        }
-//    }
-//
-//    public void clearShoppingCart() {
-//        totalCost = new BigDecimal(0);
-//        books.clear();
-//        counter = 0;
-//    }
-
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     public void addBook(Book book) {
@@ -89,6 +74,14 @@ public class ShoppingCart {
         return cartBooks.stream()
                 .filter(i -> i.idEquals(book))
                 .findFirst();
+    }
+
+    public int getCartSize() {
+        if (CollectionUtils.isEmpty(cartBooks)) {
+            return 0;
+        } else {
+            return cartBooks.size();
+        }
     }
 
 }

@@ -150,7 +150,7 @@
                 <div class="card-body">
                     <h5 class="card-title" th:text="${book.title}">Product Title</h5>
                     <p class="card-text" th:text="${book.price + ' zł'}">Product Price</p>
-                    <form action="/cart/add/" method="post">
+                    <form action="/cart/save" method="post">
                         <input type="hidden" name="bookId" th:value="${book.id}"/>
                         <button type="submit" class="btn btn-primary">Add to Cart</button>
                         <a th:href="@{/books/details/{bookId}(bookId=${book.id})}" class="btn btn-secondary">Details</a>
