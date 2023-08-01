@@ -1,12 +1,18 @@
 package com.onlinebookstore.controller;
 
+import com.onlinebookstore.cart.CartOperation;
+import com.onlinebookstore.cart.CartService;
+import com.onlinebookstore.cart.ShoppingCart;
 import com.onlinebookstore.entity.Author;
+import com.onlinebookstore.entity.Book;
 import com.onlinebookstore.entity.Category;
 import com.onlinebookstore.model.BookModel;
 import com.onlinebookstore.service.AuthorService;
 import com.onlinebookstore.service.BookService;
 import com.onlinebookstore.service.CategoryService;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,10 +28,15 @@ public class BookController {
     private final CategoryService categoryService;
     private final AuthorService authorService;
 
-    public BookController(BookService bookService, CategoryService categoryService, AuthorService authorService) {
+    // shopping cart
+    private final CartService cartService;
+
+    public BookController(BookService bookService, CategoryService categoryService,
+                          AuthorService authorService, CartService cartService) {
         this.bookService = bookService;
         this.categoryService = categoryService;
         this.authorService = authorService;
+        this.cartService = cartService;
     }
 
     // użycie BookModel zamiast Book - wywołanie książek bez paginacji
@@ -48,6 +59,24 @@ public class BookController {
 //
 //        return "book-list";
 //    }
+
+    @GetMapping
+    public String getBooks(@RequestParam(defaultValue = "0") int page,
+                           @RequestParam(defaultValue = "9") int size,
+                           @RequestParam(required = false) String keyword,
+                           Model model) {
+
+        if(keyword != null && !keyword.isEmpty()) {
+            Page<BookModel> pagedBooks = bookService.getBooksByKeyword(keyword, page, size);
+            model.addAttribute("pagedBooks", pagedBooks);
+            model.addAttribute("keyword", keyword);
+        } else {
+            Page<BookModel> pagedBooks = bookService.getAllBooksPaged(page, size);
+            model.addAttribute("pagedBooks", pagedBooks);
+        }
+
+        return "book-list";
+    }
 
     @GetMapping("/category/{categoryName}")
     public String getBooksByCategory(@PathVariable String categoryName, Model model) {
@@ -86,42 +115,6 @@ public class BookController {
 //        return "book-details";
 //    }
 
-
-    // PAGINATION + AJAX SEARCH FUNCTIONALITY
-
-//    @GetMapping
-//    public String getBooks(@RequestParam(defaultValue = "0") int page,
-//                           @RequestParam(defaultValue = "9") int size,
-//                           Model model, String keyword) {
-//        Page<BookModel> pagedBooks = bookService.getAllBooksPaged(page, size);
-//
-//        if(keyword != null) {
-//            model.addAttribute("pagedBooks", bookService.getBooksByKeyword(keyword));
-//        } else {
-//            model.addAttribute("pagedBooks", pagedBooks);
-//        }
-//
-//        return "book-list";
-//    }
-
-    @GetMapping
-    public String getBooks(@RequestParam(defaultValue = "0") int page,
-                           @RequestParam(defaultValue = "9") int size,
-                           @RequestParam(required = false) String keyword,
-                           Model model) {
-
-        if(keyword != null && !keyword.isEmpty()) {
-            Page<BookModel> pagedBooks = bookService.getBooksByKeyword(keyword, page, size);
-            model.addAttribute("pagedBooks", pagedBooks);
-            model.addAttribute("keyword", keyword);
-        } else {
-            Page<BookModel> pagedBooks = bookService.getAllBooksPaged(page, size);
-            model.addAttribute("pagedBooks", pagedBooks);
-        }
-
-        return "book-list";
-    }
-
     @GetMapping("/details/{bookId}")
     public String viewBookDetails(@PathVariable("bookId") Long bookId, Model model) {
         Map<String, Object> bookData = bookService.getBookById(bookId);
@@ -137,6 +130,22 @@ public class BookController {
         return "book-details";
     }
 
+
+
+    // shopping cart below
+
+//    @GetMapping("/add/{bookId}")
+//    public String addBookToCart(@PathVariable("bookId") Long bookId, Model model, HttpSession httpSession) {
+//        model.addAttribute("books", )
+//        return "book-list";
+//    }
+
+//    @GetMapping("/add/{bookId}")
+//    public String addBookToCart(@PathVariable("bookId") Long itemId, Model model) {
+//        cartService.bookOperation(itemId, CartOperation.INCREASE);
+//        model.addAttribute("items", cartService.getAllBooks());
+//        return "book-list";
+//    }
 
 }
 

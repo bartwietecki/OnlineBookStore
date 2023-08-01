@@ -38,14 +38,6 @@ public class BookService {
         this.authorRepository = authorRepository;
     }
 
-    // metoda do pobrania wszystkich książek ale nie jest używana bo używam metody z paginacją
-    public List<BookModel> getAllBooks() {
-        List<Book> books = bookRepository.findAll();
-        return books.stream()
-                .map(this::mapBookToBookModel)
-                .collect(Collectors.toList());
-    }
-
     //     metoda potrzebna do paginacji listy książek na stronie
     public Page<BookModel> getAllBooksPaged(int pageNumber, int pageSize) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
@@ -85,20 +77,6 @@ public class BookService {
         bookRepository.save(book);
     }
 
-//    private BookModel mapBookToBookModel(Book book) {
-//        BookModel bookModel = new BookModel();
-//        bookModel.setId(book.getId());
-//        bookModel.setTitle(book.getTitle());
-//        bookModel.setDescription(book.getDescription());
-//        bookModel.setPrice(book.getPrice());
-//        bookModel.setImageName(book.getImageName());
-//        bookModel.setCategoryId(book.getCategory().getId());
-//        bookModel.setAuthorId(book.getAuthor().getId());
-//        bookModel.setCreateDate(book.getCreateDate()); // Przypisz datę utworzenia
-//
-//        return bookModel;
-//    }
-
     // adding additional author name and surname for book details
     private BookModel mapBookToBookModel(Book book) {
         BookModel bookModel = new BookModel();
@@ -110,7 +88,6 @@ public class BookService {
         bookModel.setCategoryId(book.getCategory().getId());
         bookModel.setAuthorId(book.getAuthor().getId());
         bookModel.setCreateDate(book.getCreateDate()); // Przypisz datę utworzenia
-
         bookModel.setCategoryName(book.getCategory().getName());
 
         // Ustawienie imienia i nazwiska autora
@@ -122,20 +99,6 @@ public class BookService {
 
         return bookModel;
     }
-
-//    public BookModel getBookById(Long bookId) {
-//        Book book = bookRepository.findById(bookId)
-//                .orElseThrow(() -> new IllegalArgumentException("Book with id " + bookId + " not found"));
-//
-//        return mapBookToBookModel(book);
-//    }
-
-
-    // AJAX SEARCH
-//    public List<BookModel> getBooksByKeyword(String keyword) {
-//        List<Book> books = bookRepository.findByKeyword(keyword);
-//        return books.stream().map(this::mapBookToBookModel).collect(Collectors.toList());
-//    }
 
     public Page<BookModel> getBooksByKeyword(String keyword, int pageNumber, int pageSize) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
@@ -176,5 +139,13 @@ public class BookService {
         return result;
     }
 
+//     shopping cart
+
+//    public BookModel getOneBookById(Long bookId) {
+//        Book book = bookRepository.findById(bookId)
+//                .orElseThrow(() -> new IllegalArgumentException("Book with id " + bookId + " not found"));
+//
+//        return mapBookToBookModel(book);
+//    }
 
 }
