@@ -96,10 +96,25 @@
             color: black;
             border-color: black;
         }
+
+        .cart-btn {
+            background-color: black;
+            color: white;
+            border: 1px solid black;
+            border-radius: 5px;
+            transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+            padding: 8px 15px;
+            text-decoration: none;
+        }
+
+        .cart-btn:hover {
+            background-color: white;
+            color: black;
+            border-color: black;
+        }
     </style>
 </head>
 <body>
-
 
 <!-- OTO KOD NAWIGACJI BEZ ZMIAN CO W BOOK-LIST , może warto przenieść to do fragmentu ?-->
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -182,6 +197,8 @@
         <img src="https://via.placeholder.com/400" class="book-image" alt="Book Image">
         <p class="book-description" th:text="${book.description}">Product Description</p>
         <p class="book-price" th:text="${book.price + ' zł'}">Product Price</p>
+
+        <button type="submit" class="cart-btn">Add to Cart</button>
     </div>
 </div>
 
