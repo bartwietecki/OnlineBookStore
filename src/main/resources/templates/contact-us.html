@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title>Contact Us</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0/css/bootstrap.min.css">
+  <style>
+    /* Styl dla całej strony */
+    body {
+      background-color: #f6f6f6;
+    }
+
+    /* Styl dla nagłówka */
+    .navbar {
+      background-color: darkgray;
+      padding: 5px;
+    }
+
+    .navbar-brand {
+      font-size: 35px;
+      color: black;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      margin-left: 10px;
+    }
+
+    /* Styl dla tytułu */
+    h1 {
+      font-size: 30px;
+      font-weight: bold;
+      color: black;
+      margin-top: 50px;
+      margin-bottom: 20px;
+      margin-left: 10px;
+      text-align: center;
+    }
+
+    /* Styl dla danych kontaktowych */
+    .contact-info {
+      font-size: 20px;
+      color: black;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    /* Zmienia obramowanie na białe dla przycisków */
+    button, .btn {
+      border: 1px solid white;
+    }
+
+    /* Po najechaniu na przycisk zmienia obramowanie na czarne */
+    button:hover, .btn:hover {
+      border: 1px solid black;
+    }
+
+    /* Styl dla przycisku "Add to Cart" po najechaniu */
+    .btn-primary:hover {
+      background-color: white; /* Tło po najechaniu - zmieniamy na białe */
+      color: black; /* Kolor tekstu po najechaniu - zmieniamy na czarny */
+      border-color: black; /* Obramowanie po najechaniu - zmieniamy na czarne */
+    }
+
+    .back-btn {
+      position: absolute;
+      top: 120px;
+      left: 10px;
+      background-color: black;
+      color: white;
+      border: 1px solid black;
+      border-radius: 5px;
+      transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+      padding: 8px 15px;
+      text-decoration: none;
+    }
+
+    .back-btn:hover {
+      background-color: white;
+      color: black;
+      border-color: black;
+    }
+  </style>
+</head>
+
+<!-- OTO KOD NAWIGACJI BEZ ZMIAN CO W BOOK-DETAILS , może warto przenieść to do fragmentu ?-->
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/books">Online Book Store</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+</nav>
+
+<body>
+<div class="container">
+  <a href="/books" class="back-btn">Back</a>
+  <h1>Contact Us</h1>
+  <p class="contact-info">Email: contact@onlinebookstore.com</p>
+  <p class="contact-info">Phone: (+1) 202 555 0196</p>
+  <p class="contact-info">Address:</p>
+  <p class="contact-info">2248 CAMINO LARGO DR</p>
+  <p class="contact-info">CHINO CHILLS CA 89061-9202</p>
+  <p class="contact-info">USA</p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
