@@ -23,13 +23,17 @@
         <thead>
         <tr>
           <th scope="col">Book</th>
+          <th scope="col">Author</th>
+          <th scope="col">Category</th>
           <th scope="col">Price</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="book : ${books}">
-          <td th:text="${book.title}">Book Title</td>
-          <td th:text="${book.price} + ' zł'">Book Price</td>
+        <tr th:each="cartBook : ${books}">
+          <td th:text="${cartBook.book.title}">Book Title</td>
+          <td th:text="${cartBook.book.authorName} + ' ' + ${cartBook.book.authorSurname}">Author</td>
+          <td th:text="${cartBook.book.categoryName}">Category</td>
+          <td th:text="${cartBook.book.price} + ' zł'">Book Price</td>
         </tr>
         <tr>
           <td colspan="2" class="text-end">Total: <span th:text="${totalCost} + ' zł'">0 zł</span></td>

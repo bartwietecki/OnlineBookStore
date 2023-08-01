@@ -18,11 +18,12 @@ import java.util.Optional;
 @Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
 @Data
 public class ShoppingCart {
+
     private List<CartBook> cartBooks;
     private int counter = 0;
     private BigDecimal totalCost;
 
-    public void addToCart(Book book) {
+    public void addToCart(BookModel book) {
         if (cartBooks == null) {
             cartBooks = new ArrayList<>();
         }
@@ -42,21 +43,20 @@ public class ShoppingCart {
         recalculatePriceAndCounter();
     }
 
-    public void decreaseBook(Book book) {
+    public void decreaseBook(BookModel book) {
         Optional<CartBook> oCartBook = getCartBookByBook(book);
         if (oCartBook.isPresent()) {
             CartBook cartBook = oCartBook.get();
             cartBook.decreaseCounter();
             if (cartBook.hasZeroBooks()) {
-                removeAllIBooks(book);
+                removeAllBooks(book);
             } else {
                 recalculatePriceAndCounter();
             }
         }
     }
 
-
-    public void removeAllIBooks(Book book) {
+    public void removeAllBooks(BookModel book) {
         cartBooks.removeIf(i -> i.idEquals(book));
         recalculatePriceAndCounter();
     }
@@ -68,7 +68,7 @@ public class ShoppingCart {
                 .reduce(0, Integer::sum);
     }
 
-    private Optional<CartBook> getCartBookByBook(Book book) {
+    private Optional<CartBook> getCartBookByBook(BookModel book) {
         return cartBooks.stream()
                 .filter(i -> i.idEquals(book))
                 .findFirst();

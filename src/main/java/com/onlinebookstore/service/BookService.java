@@ -139,13 +139,4 @@ public class BookService {
         return result;
     }
 
-//     shopping cart
-
-//    public BookModel getOneBookById(Long bookId) {
-//        Book book = bookRepository.findById(bookId)
-//                .orElseThrow(() -> new IllegalArgumentException("Book with id " + bookId + " not found"));
-//
-//        return mapBookToBookModel(book);
-//    }
-
 }

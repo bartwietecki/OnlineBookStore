@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.*;
 public class CartController {
 
     private final CartService cartService;
+    private final ShoppingCart shoppingCart;
 
-    public CartController(CartService cartService) {
+    public CartController(CartService cartService, ShoppingCart shoppingCart) {
         this.cartService = cartService;
+        this.shoppingCart = shoppingCart;
     }
 
     @PostMapping("/save")
@@ -22,7 +24,7 @@ public class CartController {
     }
 
     @GetMapping
-    public String showCart(Model model, ShoppingCart shoppingCart) {
+    public String showCart(Model model) {
         model.addAttribute("books", shoppingCart.getCartBooks());
         model.addAttribute("totalCost", shoppingCart.getTotalCost() != null ? shoppingCart.getTotalCost().toString() : "0");
         int cartSize = shoppingCart.getCartSize();

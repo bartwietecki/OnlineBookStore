@@ -130,23 +130,6 @@ public class BookController {
         return "book-details";
     }
 
-
-
-    // shopping cart below
-
-//    @GetMapping("/add/{bookId}")
-//    public String addBookToCart(@PathVariable("bookId") Long bookId, Model model, HttpSession httpSession) {
-//        model.addAttribute("books", )
-//        return "book-list";
-//    }
-
-//    @GetMapping("/add/{bookId}")
-//    public String addBookToCart(@PathVariable("bookId") Long itemId, Model model) {
-//        cartService.bookOperation(itemId, CartOperation.INCREASE);
-//        model.addAttribute("items", cartService.getAllBooks());
-//        return "book-list";
-//    }
-
 }
 
 
