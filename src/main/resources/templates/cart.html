@@ -1,47 +1,151 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shopping Cart</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
-        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
-        crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0/css/bootstrap.min.css">
+
+    <style>
+        .navbar {
+            background-color: darkgray;
+            padding: 5px;
+        }
+
+        body {
+            background-color: #f6f6f6;
+        }
+
+        .navbar-brand {
+            font-size: 35px;
+            color: black !important;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            margin-left: 10px;
+        }
+
+        body {
+            background-color: #f6f6f6;
+        }
+
+        .back-btn {
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+
+        .table {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .table th {
+            background-color: black;
+            color: white;
+        }
+
+        .table th,
+        .table td {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .table td {
+            vertical-align: middle;
+        }
+
+        .table img {
+            max-width: 50px;
+            max-height: 70px;
+        }
+
+        .summary p {
+            text-align: right;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .summary span {
+            margin-right: 10px;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 120px;
+            left: 10px;
+            background-color: black;
+            color: white;
+            border: 1px solid black;
+            border-radius: 5px;
+            transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+            padding: 8px 15px;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            background-color: white;
+            color: black;
+            border-color: black;
+        }
+
+        .navbar-dark {
+            background-color: darkgrey;
+            padding: 5px;
+        }
+
+        .total-label {
+            font-weight: bold;
+        }
+    </style>
+
 </head>
 <body>
 
+<nav class="navbar navbar-expand-lg bg-body-tertiary navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/books">Online Book Store</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+        </button>
+    </div>
+</nav>
+
 <div class="container" style="margin-top: 50px;">
-  <div class="row">
-    <div th:if="${books == null or books.size() == 0}" class="col-12">
-      <div class="text-center">
-<!--        <img src="/uploads/empty-cart.png" style="max-width: 300px;" alt="Empty Cart">-->
-        <h3>Your cart is empty</h3>
-      </div>
+    <a href="/books" class="back-btn">Back</a>
+    <div class="row">
+        <div th:if="${books == null or books.size() == 0}" class="col-12">
+            <div class="text-center">
+                <h3>Your cart is empty</h3>
+            </div>
+        </div>
+        <div th:if="${books != null && books.size() > 0}" class="col-12">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Book</th>
+                    <th scope="col">Author</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Price</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="cartBook : ${books}">
+                    <td>
+<!--                        <img th:src="@{${cartBook.book.imagePath}}" alt="Book Image" class="img-thumbnail">-->
+                        <span th:text="${cartBook.book.title}"></span>
+                    </td>
+                    <td th:text="${cartBook.book.authorName + ' ' + cartBook.book.authorSurname}"></td>
+                    <td th:text="${cartBook.book.categoryName}"></td>
+                    <td th:text="${cartBook.book.price + ' zł'}"></td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="text-end"><span class ="total-label">Total:</span></td>
+                    <td th:text="${totalCost + ' zł'}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div th:if="${books != null && books.size() > 0}" class="col-12">
-      <table class="table">
-        <thead>
-        <tr>
-          <th scope="col">Book</th>
-          <th scope="col">Author</th>
-          <th scope="col">Category</th>
-          <th scope="col">Price</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="cartBook : ${books}">
-          <td th:text="${cartBook.book.title}">Book Title</td>
-          <td th:text="${cartBook.book.authorName} + ' ' + ${cartBook.book.authorSurname}">Author</td>
-          <td th:text="${cartBook.book.categoryName}">Category</td>
-          <td th:text="${cartBook.book.price} + ' zł'">Book Price</td>
-        </tr>
-        <tr>
-          <td colspan="2" class="text-end">Total: <span th:text="${totalCost} + ' zł'">0 zł</span></td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
@@ -49,3 +153,59 @@
         crossorigin="anonymous"></script>
 </body>
 </html>
+
+
+
+
+
+
+<!--<div class="main-content">-->
+
+<!--    <div style="width: 100%; display: flex; flex-direction: column; align-items: center;">-->
+
+<!--        <table cellspacing="0">-->
+<!--            <tr>-->
+<!--                <th style="width: 30px;">No.</th>-->
+<!--                <th style="width: 50px;"></th>-->
+<!--                <th>Book</th>-->
+<!--                <th>Capacity</th>-->
+<!--                <th>Cost</th>-->
+<!--                <th style="width: 30px;"></th>-->
+<!--            </tr>-->
+<!--            <tr th:each="cartBook : ${books}">-->
+<!--                <td>1</td>-->
+<!--                <td>-->
+<!--                    <img th:src="@{${cartItem.item.imgUrl}}">-->
+<!--                </td>-->
+<!--                <td th:text="${cartBook.book.title}"></td>-->
+<!--                <td style="display: flex; padding-top: 10px">-->
+<!--                    <a class="mbtn" th:href="@{'/order/decrease/' + ${cartItem.item.id}}">-</a>-->
+<!--                    <p th:text="${cartItem.counter}"></p>-->
+<!--                    <a class="mbtn" th:href="@{'/order/increase/' + ${cartItem.item.id}}">+</a>-->
+<!--                </td>-->
+<!--                <td th:text="${cartBook.book.price}+ ' zł'"></td>-->
+<!--                <td>-->
+<!--                    <a class="mbtn" th:href="@{'/order/remove/' + ${cartItem.item.id}}">X</a>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--        </table>-->
+
+<!--        <div class="summary">-->
+<!--            <p><span>Do zapłaty</span><span th:text="${cartBook.book.price}"></span>zł</p>-->
+<!--        </div>-->
+<!--        <a th:href="@{/order/summary}" class="add-btn">Dalej</a>-->
+<!--    </div>-->
+<!--</div>-->
+
+
+
+
+
+
+
+
+
+
+
+
+

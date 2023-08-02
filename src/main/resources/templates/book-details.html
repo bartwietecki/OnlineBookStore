@@ -118,8 +118,6 @@
 
 <!-- OTO KOD NAWIGACJI BEZ ZMIAN CO W BOOK-LIST , może warto przenieść to do fragmentu ?-->
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
-
-
     <div class="container-fluid">
         <a class="navbar-brand" href="/books">Online Book Store</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -197,8 +195,10 @@
         <img src="https://via.placeholder.com/400" class="book-image" alt="Book Image">
         <p class="book-description" th:text="${book.description}">Product Description</p>
         <p class="book-price" th:text="${book.price + ' zł'}">Product Price</p>
-
-        <button type="submit" class="cart-btn">Add to Cart</button>
+        <form th:action="@{/cart/save}" method="post">
+            <input type="hidden" name="bookId" th:value="${book.id}" />
+            <button type="submit" class="cart-btn">Add to Cart</button>
+        </form>
     </div>
 </div>
 

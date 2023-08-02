@@ -33,16 +33,6 @@ public class CartController {
     }
 }
 
-//    @RequestParam(name = "bookId")
-//    @PostMapping("/add")
-//    public String add(@RequestParam(name = "bookId") Long bookId) {
-//        BookModel bookModel = bookService.getOneBookById(bookId);
-//        shoppingCart.addToCart(bookModel);
-//        return "redirect:/books";
-//    }
-//
-
-
 //    @PostMapping
 //    @RequestMapping("/makeOrder")
 //    public String makeOrder(OrderDto orderDto) {
