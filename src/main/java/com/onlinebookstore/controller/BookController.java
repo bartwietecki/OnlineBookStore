@@ -1,18 +1,14 @@
 package com.onlinebookstore.controller;
 
-import com.onlinebookstore.cart.CartOperation;
 import com.onlinebookstore.cart.CartService;
 import com.onlinebookstore.cart.ShoppingCart;
 import com.onlinebookstore.entity.Author;
-import com.onlinebookstore.entity.Book;
 import com.onlinebookstore.entity.Category;
 import com.onlinebookstore.model.BookModel;
 import com.onlinebookstore.service.AuthorService;
 import com.onlinebookstore.service.BookService;
 import com.onlinebookstore.service.CategoryService;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,8 +23,6 @@ public class BookController {
     private final BookService bookService;
     private final CategoryService categoryService;
     private final AuthorService authorService;
-
-    // shopping cart
     private final ShoppingCart shoppingCart;
 
     public BookController(BookService bookService, CategoryService categoryService,
@@ -36,6 +30,7 @@ public class BookController {
         this.bookService = bookService;
         this.categoryService = categoryService;
         this.authorService = authorService;
+
         this.shoppingCart = shoppingCart;
     }
 

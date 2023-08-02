@@ -5,6 +5,7 @@ import com.onlinebookstore.entity.Book;
 import com.onlinebookstore.model.BookModel;
 import com.onlinebookstore.repository.BookRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -63,6 +64,5 @@ public class CartService {
 
         return bookModel;
     }
-
 }
 
