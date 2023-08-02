@@ -29,14 +29,14 @@ public class BookController {
     private final AuthorService authorService;
 
     // shopping cart
-    private final CartService cartService;
+    private final ShoppingCart shoppingCart;
 
     public BookController(BookService bookService, CategoryService categoryService,
-                          AuthorService authorService, CartService cartService) {
+                          AuthorService authorService, ShoppingCart shoppingCart) {
         this.bookService = bookService;
         this.categoryService = categoryService;
         this.authorService = authorService;
-        this.cartService = cartService;
+        this.shoppingCart = shoppingCart;
     }
 
     // użycie BookModel zamiast Book - wywołanie książek bez paginacji
@@ -74,6 +74,8 @@ public class BookController {
             Page<BookModel> pagedBooks = bookService.getAllBooksPaged(page, size);
             model.addAttribute("pagedBooks", pagedBooks);
         }
+
+        model.addAttribute("cartSize", shoppingCart.getCartSize());
 
         return "book-list";
     }

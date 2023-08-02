@@ -25,10 +25,10 @@ public class CartController {
 
     @GetMapping
     public String showCart(Model model) {
-        model.addAttribute("books", shoppingCart.getCartBooks());
-        model.addAttribute("totalCost", shoppingCart.getTotalCost() != null ? shoppingCart.getTotalCost().toString() : "0");
-        int cartSize = shoppingCart.getCartSize();
-        model.addAttribute("cartSize", cartSize);
+            model.addAttribute("books", shoppingCart.getCartBooks());
+            model.addAttribute("totalCost", shoppingCart.getTotalCost() != null ? shoppingCart.getTotalCost().toString() : "0");
+            int cartSize = shoppingCart.getCartSize();
+            model.addAttribute("cartSize", cartSize);
         return "cart";
     }
 }
