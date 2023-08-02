@@ -6,18 +6,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+import java.util.List;
+
 @Controller
 @RequestMapping("/cart")
 public class CartController {
 
     private final CartService cartService;
     private final ShoppingCart shoppingCart;
-    private final OrderService orderService;
 
-    public CartController(CartService cartService, ShoppingCart shoppingCart, OrderService orderService) {
+    public CartController(CartService cartService, ShoppingCart shoppingCart) {
         this.cartService = cartService;
         this.shoppingCart = shoppingCart;
-        this.orderService = orderService;
     }
 
     @PostMapping("/save")
@@ -29,20 +30,31 @@ public class CartController {
 
     @GetMapping
     public String showCart(Model model) {
-            model.addAttribute("books", shoppingCart.getCartBooks());
-            model.addAttribute("totalCost", shoppingCart.getTotalCost() != null ? shoppingCart.getTotalCost().toString() : "0");
-//            int cartSize = shoppingCart.getCartSize();
-//            model.addAttribute("cartSize", cartSize);
+        model.addAttribute("books", shoppingCart.getCartBooks());
+        model.addAttribute("totalCost", shoppingCart.getTotalCost() != null ? shoppingCart.getTotalCost().toString() : "0");
+        model.addAttribute("orderModel", new OrderModel());
         return "cart";
     }
 
-//    @PostMapping
-//    @RequestMapping("/makeOrder")
-//    public String makeOrder(OrderModel orderModel) {
-//        orderService.makeOrder(orderModel, shoppingCart);
-//        return "redirect:/books/summary";
-//    }
+    @GetMapping("/increase/{bookId}")
+    public String increaseBook(@PathVariable("bookId") Long bookId) {
+        cartService.bookOperation(bookId, CartOperation.INCREASE);
+        return "redirect:/cart";
+    }
+
+    @GetMapping("/decrease/{bookId}")
+    public String decreaseBook(@PathVariable("bookId") Long bookId) {
+        cartService.bookOperation(bookId, CartOperation.DECREASE);
+        return "redirect:/cart";
+    }
+
+    @GetMapping("/remove/{bookId}")
+    public String removeBooksFromCart(@PathVariable("bookId") Long bookId) {
+        cartService.bookOperation(bookId, CartOperation.REMOVE);
+        return "cart";
+    }
 }
+
 
 
 

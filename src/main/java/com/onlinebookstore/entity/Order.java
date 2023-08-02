@@ -4,12 +4,14 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Table(name = "customer_order")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,12 +31,13 @@ public class Order {
     private String homeNo;
     private BigDecimal price;
 
+    @CreationTimestamp
     private LocalDateTime createDate;
     private String orderStatus;
 
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     @JoinTable(
-            name = "order_book",
+            name = "customer_order_book",
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "book_id")
     )
