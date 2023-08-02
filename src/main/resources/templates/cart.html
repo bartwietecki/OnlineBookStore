@@ -95,6 +95,27 @@
         .total-label {
             font-weight: bold;
         }
+
+         .place-order-btn {
+             width: 100%;
+             margin-top: 20px;
+             margin-bottom: 20px;
+             background-color: black;
+             color: white;
+             border: 1px solid black;
+             border-radius: 5px;
+             padding: 8px 15px;
+             text-decoration: none;
+             display: block;
+             text-align: center;
+             font-weight: bold;
+         }
+
+        .place-order-btn:hover {
+            background-color: white;
+            color: black;
+            border-color: black;
+        }
     </style>
 
 </head>
@@ -126,24 +147,73 @@
                     <th scope="col">Author</th>
                     <th scope="col">Category</th>
                     <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col"></th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="cartBook : ${books}">
                     <td>
-<!--                        <img th:src="@{${cartBook.book.imagePath}}" alt="Book Image" class="img-thumbnail">-->
+                        <!--                        <img th:src="@{${cartBook.book.imagePath}}" alt="Book Image" class="img-thumbnail">-->
                         <span th:text="${cartBook.book.title}"></span>
                     </td>
                     <td th:text="${cartBook.book.authorName + ' ' + cartBook.book.authorSurname}"></td>
                     <td th:text="${cartBook.book.categoryName}"></td>
                     <td th:text="${cartBook.book.price + ' zł'}"></td>
+
+                    <td>
+                        <!-- Przyciski do manipulacji ilością książki w koszyku -->
+                        <a th:href="@{'/cart/decrease/' + ${cartBook.book.id}}" class="btn btn-sm btn-secondary">-</a>
+                            <span th:text="${cartBook.counter}"></span>
+                        <a th:href="@{'/cart/increase/' + ${cartBook.book.id}}" class="btn btn-sm btn-secondary">+</a>
+                    </td>
+
+                    <td>
+                        <!-- Przycisk do usuwania książki z koszyka -->
+                        <a th:href="@{'/cart/remove/' + ${cartBook.book.id}}" class="btn btn-sm btn-danger">Remove</a>
+                    </td>
                 </tr>
+
                 <tr>
-                    <td colspan="3" class="text-end"><span class ="total-label">Total:</span></td>
+                    <td colspan="5" class="text-end"><span class="total-label">Total:</span></td>
                     <td th:text="${totalCost + ' zł'}"></td>
                 </tr>
                 </tbody>
             </table>
+
+            <h2 class="text-center">Place Order</h2>
+            <form th:action="@{/order/make}" th:object="${orderModel}" method="post">
+                <div class="mb-3">
+                    <label for="customerFullName" class="form-label">Full Name</label>
+                    <input type="text" class="form-control" id="customerFullName" th:field="*{customerFullName}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="customerEmail" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="customerEmail" th:field="*{customerEmail}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="city" class="form-label">City</label>
+                    <input type="text" class="form-control" id="city" th:field="*{city}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="zipCode" class="form-label">Zip Code</label>
+                    <input type="text" class="form-control" id="zipCode" th:field="*{zipCode}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="street" class="form-label">Street</label>
+                    <input type="text" class="form-control" id="street" th:field="*{street}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="streetNo" class="form-label">Street No</label>
+                    <input type="text" class="form-control" id="streetNo" th:field="*{streetNo}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="homeNo" class="form-label">Home No</label>
+                    <input type="text" class="form-control" id="homeNo" th:field="*{homeNo}" required>
+                </div>
+                <button class="btn btn-primary place-order-btn" type="submit">Place order</button>
+            </form>
+
         </div>
     </div>
 </div>
@@ -153,10 +223,6 @@
         crossorigin="anonymous"></script>
 </body>
 </html>
-
-
-
-
 
 
 <!--<div class="main-content">-->
