@@ -1,13 +1,12 @@
-package com.onlinebookstore.cart;
+package com.onlinebookstore.controller;
 
+import com.onlinebookstore.service.CartService;
+import com.onlinebookstore.service.ShoppingCart;
+import com.onlinebookstore.entity.CartOperation;
 import com.onlinebookstore.model.OrderModel;
-import com.onlinebookstore.service.OrderService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.math.BigDecimal;
-import java.util.List;
 
 @Controller
 @RequestMapping("/cart")

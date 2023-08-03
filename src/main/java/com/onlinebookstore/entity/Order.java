@@ -1,6 +1,5 @@
 package com.onlinebookstore.entity;
 
-import com.onlinebookstore.order.status.OrderStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

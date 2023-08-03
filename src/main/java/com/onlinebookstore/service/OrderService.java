@@ -1,14 +1,13 @@
 package com.onlinebookstore.service;
 
-import com.onlinebookstore.cart.CartBook;
+import com.onlinebookstore.model.CartBook;
 import com.onlinebookstore.entity.Book;
 import com.onlinebookstore.entity.Order;
 import com.onlinebookstore.model.OrderModel;
-import com.onlinebookstore.order.status.OrderStatus;
+import com.onlinebookstore.entity.OrderStatus;
 import com.onlinebookstore.repository.BookRepository;
 import com.onlinebookstore.repository.OrderRepository;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;

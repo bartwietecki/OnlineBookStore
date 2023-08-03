@@ -1,8 +1,7 @@
 package com.onlinebookstore.model;
 
-import com.onlinebookstore.order.status.OrderStatus;
+import com.onlinebookstore.entity.OrderStatus;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 

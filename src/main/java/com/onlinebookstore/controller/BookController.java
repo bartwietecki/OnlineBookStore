@@ -1,7 +1,6 @@
 package com.onlinebookstore.controller;
 
-import com.onlinebookstore.cart.CartService;
-import com.onlinebookstore.cart.ShoppingCart;
+import com.onlinebookstore.service.ShoppingCart;
 import com.onlinebookstore.entity.Author;
 import com.onlinebookstore.entity.Category;
 import com.onlinebookstore.model.BookModel;

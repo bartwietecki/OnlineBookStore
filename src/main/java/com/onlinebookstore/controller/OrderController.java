@@ -1,8 +1,7 @@
 package com.onlinebookstore.controller;
 
-import com.onlinebookstore.cart.CartBook;
-import com.onlinebookstore.cart.CartService;
-import com.onlinebookstore.cart.ShoppingCart;
+import com.onlinebookstore.model.CartBook;
+import com.onlinebookstore.service.ShoppingCart;
 import com.onlinebookstore.model.OrderModel;
 import com.onlinebookstore.service.OrderService;
 import org.springframework.stereotype.Controller;

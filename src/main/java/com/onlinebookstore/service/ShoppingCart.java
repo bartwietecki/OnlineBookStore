@@ -1,6 +1,6 @@
-package com.onlinebookstore.cart;
+package com.onlinebookstore.service;
 
-import com.onlinebookstore.entity.Book;
+import com.onlinebookstore.model.CartBook;
 import com.onlinebookstore.model.BookModel;
 import lombok.Data;
 import org.springframework.context.annotation.Scope;

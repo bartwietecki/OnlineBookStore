@@ -1,4 +1,4 @@
-package com.onlinebookstore.cart;
+package com.onlinebookstore.model;
 
 import com.onlinebookstore.entity.Book;
 import com.onlinebookstore.model.BookModel;
