@@ -33,6 +33,10 @@ public class Order {
 
     @CreationTimestamp
     private LocalDateTime createDate;
+
+//    @Enumerated(EnumType.STRING)
+//    private OrderStatus orderStatus;
+
     private String orderStatus;
 
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })

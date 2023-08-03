@@ -51,7 +51,7 @@ public class CartController {
     @GetMapping("/remove/{bookId}")
     public String removeBooksFromCart(@PathVariable("bookId") Long bookId) {
         cartService.bookOperation(bookId, CartOperation.REMOVE);
-        return "cart";
+        return "redirect:/cart";
     }
 }
 

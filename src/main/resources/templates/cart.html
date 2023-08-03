@@ -136,7 +136,7 @@
     <div class="row">
         <div th:if="${books == null or books.size() == 0}" class="col-12">
             <div class="text-center">
-                <h3>Your cart is empty</h3>
+                <h3>Your cart is empty :(</h3>
             </div>
         </div>
         <div th:if="${books != null && books.size() > 0}" class="col-12">
@@ -162,14 +162,12 @@
                     <td th:text="${cartBook.book.price + ' zł'}"></td>
 
                     <td>
-                        <!-- Przyciski do manipulacji ilością książki w koszyku -->
                         <a th:href="@{'/cart/decrease/' + ${cartBook.book.id}}" class="btn btn-sm btn-secondary">-</a>
                             <span th:text="${cartBook.counter}"></span>
                         <a th:href="@{'/cart/increase/' + ${cartBook.book.id}}" class="btn btn-sm btn-secondary">+</a>
                     </td>
 
                     <td>
-                        <!-- Przycisk do usuwania książki z koszyka -->
                         <a th:href="@{'/cart/remove/' + ${cartBook.book.id}}" class="btn btn-sm btn-danger">Remove</a>
                     </td>
                 </tr>

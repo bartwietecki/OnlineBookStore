@@ -28,7 +28,6 @@ public class Book {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    // TODO czy relacja jest prawidłowa?
     @ManyToOne
     @JoinColumn(name = "author_id")
     private Author author;

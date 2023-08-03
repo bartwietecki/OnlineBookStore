@@ -82,4 +82,9 @@ public class ShoppingCart {
         }
     }
 
+    public void clearShoppingCart() {
+        totalCost = new BigDecimal(0);
+        cartBooks.clear();
+    }
+
 }
