@@ -1,5 +1,6 @@
 package com.onlinebookstore.model;
 
+import com.onlinebookstore.order.status.OrderStatus;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,5 +17,5 @@ public class OrderModel {
     private String streetNo;
     private String homeNo;
     private BigDecimal price;
-    private String orderStatus;
+    private OrderStatus orderStatus;
 }

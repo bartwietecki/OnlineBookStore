@@ -1,5 +1,6 @@
 package com.onlinebookstore.entity;
 
+import com.onlinebookstore.order.status.OrderStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,10 +35,8 @@ public class Order {
     @CreationTimestamp
     private LocalDateTime createDate;
 
-//    @Enumerated(EnumType.STRING)
-//    private OrderStatus orderStatus;
-
-    private String orderStatus;
+    @Enumerated(EnumType.STRING)
+    private OrderStatus orderStatus;
 
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     @JoinTable(

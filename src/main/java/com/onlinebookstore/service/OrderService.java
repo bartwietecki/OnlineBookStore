@@ -4,6 +4,7 @@ import com.onlinebookstore.cart.CartBook;
 import com.onlinebookstore.entity.Book;
 import com.onlinebookstore.entity.Order;
 import com.onlinebookstore.model.OrderModel;
+import com.onlinebookstore.order.status.OrderStatus;
 import com.onlinebookstore.repository.BookRepository;
 import com.onlinebookstore.repository.OrderRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -52,7 +53,9 @@ public class OrderService {
         }
 
         order.setPrice(totalPrice);
-        order.setOrderStatus("NEW");
+
+        order.setOrderStatus(OrderStatus.NEW);
+
         order.setBooks(books);
 
         return orderRepository.save(order);
