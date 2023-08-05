@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Author List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0/css/bootstrap.min.css">
+    <style>
+        .table-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .action-buttons {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Author List</h1>
+    <div class="table-container">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="author : ${authors}">
+                <td th:text="${author.name}"></td>
+                <td th:text="${author.surname}"></td>
+                <td>
+                    <a th:href="@{/admin/authors/edit/{id}(id=${author.id})}" class="btn btn-primary action-buttons">Edit</a>
+                    <a th:href="@{/admin/authors/delete/{id}(id=${author.id})}" class="btn btn-danger action-buttons">Delete</a>
+<!--                    <form th:action="@{/admin/authors/delete/{id}(id=${author.id})}" method="post">-->
+<!--                        <button type="submit" class="btn btn-danger action-buttons">Delete</button>-->
+<!--                    </form>-->
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <a th:href="@{/admin/authors/add}" class="btn btn-success">Add New Author</a>
+    </div>
+</div>
+</body>
+</html>

@@ -1,52 +1,24 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Add Author</title>
-  <!-- Dodaj linki do Bootstrapa CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0/css/bootstrap.min.css">
 </head>
 <body>
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">My Bookstore</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="/books">Books</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="/authors/add">Add Author</a>
-      </li>
-    </ul>
-  </div>
-</nav>
-
-<div class="container mt-4">
-  <h2 class="mb-3">Add Author</h2>
-  <form th:action="@{/authors/save}" th:object="${authorModel}" method="post">
+<div class="container">
+  <h1>Add Author</h1>
+  <form th:object="${authorModel}" th:action="@{/admin/authors/save}" method="post">
     <div class="form-group">
-      <label for="name">Name</label>
-      <input type="text" class="form-control" id="name" th:field="*{name}" required>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" class="form-control" th:field="*{name}">
     </div>
     <div class="form-group">
-      <label for="surname">Surname</label>
-      <input type="text" class="form-control" id="surname" th:field="*{surname}" required>
+      <label for="surname">Surname:</label>
+      <input type="text" id="surname" name="surname" class="form-control" th:field="*{surname}">
     </div>
-    <button type="submit" class="btn btn-primary">Add Author</button>
+    <button type="submit" class="btn btn-primary">Save</button>
   </form>
 </div>
-
-<!-- Dodaj linki do Bootstrapa JS (jQuery oraz Popper.js są wymagane przez Bootstrapa) -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
 </body>
 </html>
