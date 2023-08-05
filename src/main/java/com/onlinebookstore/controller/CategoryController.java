@@ -40,11 +40,11 @@ public class CategoryController {
         }
     }
 
-    @GetMapping
-    public String admin(Model model) {
-        List<Category> categories = categoryService.getAllCategories();
-        model.addAttribute("categories", categories);
-        return "admin";
-    }
+//    @GetMapping
+//    public String admin(Model model) {
+//        List<Category> categories = categoryService.getAllCategories();
+//        model.addAttribute("categories", categories);
+//        return "admin";
+//    }
 
 }
