@@ -8,6 +8,7 @@ import com.onlinebookstore.repository.AuthorRepository;
 import com.onlinebookstore.repository.BookRepository;
 import com.onlinebookstore.repository.CategoryRepository;
 import jakarta.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -16,7 +17,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -24,6 +30,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class BookService {
 
@@ -58,7 +65,7 @@ public class BookService {
                 .collect(Collectors.toList());
     }
 
-    public void addBook(BookModel bookModel, Long categoryId, Long authorId) {
+    public void addBook(BookModel bookModel, Long categoryId, Long authorId, MultipartFile file) {
         Category category = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new IllegalArgumentException("Category with id " + categoryId + " not found"));
 
@@ -75,9 +82,9 @@ public class BookService {
         book.setAuthor(author);
 
         bookRepository.save(book);
+        saveBookImage(file);
     }
 
-    // adding additional author name and surname for book details
     private BookModel mapBookToBookModel(Book book) {
         BookModel bookModel = new BookModel();
         bookModel.setId(book.getId());
@@ -137,6 +144,15 @@ public class BookService {
         }
 
         return result;
+    }
+
+    private void saveBookImage(MultipartFile file) {
+        Path uploads = Paths.get("./uploads");
+        try {
+            Files.copy(file.getInputStream(), uploads.resolve(file.getOriginalFilename()));
+        } catch (IOException e) {
+            log.error(e.getMessage());
+        }
     }
 
 }

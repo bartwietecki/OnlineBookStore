@@ -1,20 +1,25 @@
 package com.onlinebookstore.controller;
 
-import com.onlinebookstore.service.ShoppingCart;
 import com.onlinebookstore.entity.Author;
 import com.onlinebookstore.entity.Category;
 import com.onlinebookstore.model.BookModel;
 import com.onlinebookstore.service.AuthorService;
 import com.onlinebookstore.service.BookService;
 import com.onlinebookstore.service.CategoryService;
+import com.onlinebookstore.service.ShoppingCart;
+import lombok.Value;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
 
+// ??? SLF4J ???
+@Slf4j
 @Controller
 @RequestMapping("/books")
 public class BookController {
@@ -94,9 +99,12 @@ public class BookController {
     @PostMapping("/save")
     public String addBook(@ModelAttribute BookModel bookModel,
                           @RequestParam("categoryId") Long categoryId,
-                          @RequestParam("authorId") Long authorId) {
+                          @RequestParam("authorId") Long authorId,
+                          @RequestParam("file") MultipartFile file) {
 
-        bookService.addBook(bookModel, categoryId, authorId);
+        bookModel.setImageName(file.getOriginalFilename());
+
+        bookService.addBook(bookModel, categoryId, authorId, file);
 
         return "redirect:/books/add";
     }
@@ -122,6 +130,8 @@ public class BookController {
         model.addAttribute("book", bookModel);
         model.addAttribute("categoryName", categoryName);
         model.addAttribute("authorName", authorName);
+
+        model.addAttribute("cartSize", shoppingCart.getCartSize());
 
         return "book-details";
     }

@@ -5,6 +5,7 @@ import com.onlinebookstore.service.ShoppingCart;
 import com.onlinebookstore.model.OrderModel;
 import com.onlinebookstore.service.OrderService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,7 +34,8 @@ public class OrderController {
     }
 
     @GetMapping("/summary")
-    public String showSummary() {
+    public String showSummary(Model model) {
+        model.addAttribute("cartSize", shoppingCart.getCartSize());
         return "summary";
     }
 

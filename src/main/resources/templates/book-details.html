@@ -47,6 +47,16 @@
             margin-bottom: 10px;
         }
 
+        .product-image {
+            max-width: 400px;
+            max-height: 400px;
+            width: auto;
+            height: auto;
+            margin-bottom: 10px;
+            border: 1px solid black;
+            object-fit: cover;
+        }
+
         .book-description {
             font-size: 25px;
             margin-bottom: 20px;
@@ -116,7 +126,7 @@
 </head>
 <body>
 
-<!-- OTO KOD NAWIGACJI BEZ ZMIAN CO W BOOK-LIST , może warto przenieść to do fragmentu ?-->
+<!--FRAGMENT-->
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
         <a class="navbar-brand" href="/books">Online Book Store</a>
@@ -134,65 +144,31 @@
                 <!--                    <a class="nav-link" href="#">My Orders</a>-->
                 <!--                </li>-->
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Cart <i class="fas fa-shopping-cart"></i></a>
+                    <a class="nav-link" href="/cart">Cart <i class="fas fa-shopping-cart"></i>
+                        <span class="badge text-bg-secondary" th:text="'( ' + ${cartSize} + ' )'"
+                              style="color: black;"></span>
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Contact Us <i class="fas fa-phone-alt"></i></a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/login}">Log Out <i class="fas fa-sign-out-alt"></i></a>
+                </li>
             </ul>
         </div>
     </div>
-
-
 </nav>
-
-<!--<div class="container mt-3">-->
-<!--    <div class="row justify-content-center">-->
-<!--        <div class="col-md-8">-->
-<!--            <div class="card">-->
-<!--                <img src="https://via.placeholder.com/400" class="card-img-top" alt="Book Image">-->
-<!--                <div class="card-body">-->
-<!--                    <h5 class="card-title" th:text="${book.title}">Product Title</h5>-->
-<!--                    <p class="card-text" th:text="${book.description}">Product Description</p>-->
-<!--                    <p class="card-text" th:text="${book.price + ' zł'}">Product Price</p>-->
-<!--                    &lt;!&ndash; Dodaj inne informacje o książce, jeśli są potrzebne &ndash;&gt;-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-
-
-<!--DETAILS !!-->
-
-<!--<div class="container mt-3">-->
-
-<!--    <a href="/books" class="back-btn">Back</a>-->
-
-<!--    <div class="book-details-container">-->
-<!--        <h1 class="book-title" th:text="${book.title}">Product Title</h1>-->
-<!--        <img src="https://via.placeholder.com/400" class="book-image" alt="Book Image">-->
-<!--        <p class="book-description" th:text="${book.description}">Product Description</p>-->
-
-<!--        <p class="book-category" th:text="${book.categoryId}">Product Category</p>-->
-
-<!--        <p class="book-price" th:text="${book.price + ' zł'}">Product Price</p>-->
-<!--    </div>-->
-<!--</div>-->
-
 
 <div class="container mt-3">
     <a href="/books" class="back-btn">Back</a>
     <div class="book-details-container">
         <h1 class="book-title" th:text="${book.title}">Product Title</h1>
-<!--        <p class="book-author" th:text="${authorName}">Product Author</p>-->
         <p class="book-author" th:text="${book.authorName + ' ' + book.authorSurname}">Product Author</p>
         <p class="book-category" th:text="${categoryName}">Product Category</p>
 
-<!--        <p class="book-category">Category: <span th:text="${book.categoryName}">Unknown Category</span></p>-->
-<!--        <p class="book-author">Author: <span th:text="${book.authorName}">Unknown Author</span></p>-->
+        <img th:src="@{/uploads/__${book.getImageName()}__}" class="responsive card-img-top product-image"/>
 
-        <img src="https://via.placeholder.com/400" class="book-image" alt="Book Image">
         <p class="book-description" th:text="${book.description}">Product Description</p>
         <p class="book-price" th:text="${book.price + ' zł'}">Product Price</p>
         <form th:action="@{/cart/save}" method="post">
@@ -201,10 +177,6 @@
         </form>
     </div>
 </div>
-
-
-
-
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"

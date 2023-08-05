@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Summary</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         .navbar {
             background-color: darkgray;
@@ -28,6 +29,13 @@
             margin-top: 10px;
             margin-bottom: 10px;
             margin-left: 10px;
+        }
+
+        .navbar-nav .nav-link {
+            font-size: 20px;
+            color: black;
+            margin-top: 10px;
+            margin-bottom: 10px;
         }
 
         .go-btn {
@@ -62,13 +70,36 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg bg-body-tertiary navbar-dark">
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
         <a class="navbar-brand" href="/books">Online Book Store</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                 aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
         </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <!--                                <li class="nav-item">-->
+                <!--                                    <a class="nav-link" href="#">Edit Account</a>-->
+                <!--                                </li>-->
+                <!--                                <li class="nav-item">-->
+                <!--                                    <a class="nav-link" href="#">My Orders</a>-->
+                <!--                                </li>-->
+                <li class="nav-item">
+                    <a class="nav-link" href="/cart">Cart <i class="fas fa-shopping-cart"></i>
+                        <span class="badge text-bg-secondary" th:text="'( ' + ${cartSize} + ' )'"
+                              style="color: black;"></span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact-us">Contact Us <i class="fas fa-phone-alt"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/login}">Log Out <i class="fas fa-sign-out-alt"></i></a>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>
 

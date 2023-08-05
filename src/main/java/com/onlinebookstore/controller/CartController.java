@@ -32,6 +32,7 @@ public class CartController {
         model.addAttribute("books", shoppingCart.getCartBooks());
         model.addAttribute("totalCost", shoppingCart.getTotalCost() != null ? shoppingCart.getTotalCost().toString() : "0");
         model.addAttribute("orderModel", new OrderModel());
+        model.addAttribute("cartSize", shoppingCart.getCartSize());
         return "cart";
     }
 
