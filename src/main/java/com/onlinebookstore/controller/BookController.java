@@ -2,6 +2,7 @@ package com.onlinebookstore.controller;
 
 import com.onlinebookstore.entity.Author;
 import com.onlinebookstore.entity.Category;
+import com.onlinebookstore.model.AuthorModel;
 import com.onlinebookstore.model.BookModel;
 import com.onlinebookstore.service.AuthorService;
 import com.onlinebookstore.service.BookService;
@@ -89,7 +90,7 @@ public class BookController {
     @GetMapping("/add")
     public String showAddBookForm(Model model) {
         List<Category> categories = categoryService.getAllCategories();
-        List<Author> authors = authorService.getAllAuthors();
+        List<AuthorModel> authors = authorService.getAllAuthors();
         model.addAttribute("bookModel", new BookModel());
         model.addAttribute("categories", categories);
         model.addAttribute("authors", authors);
