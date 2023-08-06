@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Book List</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0/css/bootstrap.min.css">
+  <style>
+    .table-container {
+      display: flex;
+      justify-content: center;
+    }
+
+    .action-buttons {
+      margin-right: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Book List</h1>
+  <div class="table-container">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Image</th>
+        <th>Category</th>
+        <th>Author</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="book : ${books}">
+        <td th:text="${book.title}"></td>
+        <td th:text="${book.description}"></td>
+        <td th:text="${book.price}"></td>
+        <td th:text="${book.imageName}"></td>
+        <td th:text="${book.categoryName}"></td>
+        <td th:text="${book.authorName + ' ' + book.authorSurname}"></td>
+        <td>
+          <a th:href="@{/admin/books/edit/{id}(id=${book.id})}" class="btn btn-primary action-buttons">Edit</a>
+          <a th:href="@{/admin/books/delete/{id}(id=${book.id})}" class="btn btn-danger action-buttons">Delete</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="text-center">
+    <a th:href="@{/admin/books/add}" class="btn btn-success">Add New Book</a>
+    <a th:href="@{/admin}" class="btn btn-success">Go to Admin Page</a>
+  </div>
+</div>
+</body>
+</html>

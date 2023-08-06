@@ -1,52 +1,44 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <title>Add Book Form</title>
+  <title>Add Book</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0/css/bootstrap.min.css">
 </head>
 <body>
-<div class="container mt-4">
-  <h2 class="mb-3">Add Book</h2>
-  <form th:action="@{/books/save}" th:object="${bookModel}" method="post">
+<div class="container">
+  <h1>Add Book</h1>
+  <form th:object="${bookModel}" th:action="@{/admin/books/save}" method="post">
     <div class="form-group">
-      <label for="title">Title</label>
-      <input type="text" class="form-control" id="title" th:field="*{title}" required>
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title" class="form-control" th:field="*{title}">
     </div>
     <div class="form-group">
-      <label for="description">Description</label>
-      <textarea class="form-control" id="description" th:field="*{description}" required></textarea>
+      <label for="description">Description:</label>
+      <textarea id="description" name="description" class="form-control" th:field="*{description}"></textarea>
     </div>
     <div class="form-group">
-      <label for="price">Price</label>
-      <input type="text" class="form-control" id="price" th:field="*{price}" required>
-    </div>
-<!--    <div class="form-group">-->
-<!--      <label for="price">Price:</label>-->
-<!--      <input type="number" step="0.01" class="form-control" id="price" th:field="${bookModel.price}" required>-->
-<!--    </div>-->
-    <div class="form-group">
-      <label for="imageName">Image Name</label>
-      <input type="text" class="form-control" id="imageName" th:field="*{imageName}" required>
+      <label for="price">Price:</label>
+      <input type="text" id="price" name="price" class="form-control" th:field="*{price}">
     </div>
     <div class="form-group">
-      <label for="categoryId">Category</label>
-      <select class="form-control" id="categoryId" th:field="*{categoryId}" required>
+      <label for="imageName">Image Name:</label>
+      <input type="text" id="imageName" name="imageName" class="form-control" th:field="*{imageName}">
+    </div>
+    <div class="form-group">
+      <label for="categoryId">Category:</label>
+      <select id="categoryId" name="categoryId" class="form-control" th:field="*{categoryId}">
         <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
       </select>
     </div>
     <div class="form-group">
-      <label for="authorId">Author</label>
-      <select class="form-control" id="authorId" th:field="*{authorId}" required>
+      <label for="authorId">Author:</label>
+      <select id="authorId" name="authorId" class="form-control" th:field="*{authorId}">
         <option th:each="author : ${authors}" th:value="${author.id}" th:text="${author.name + ' ' + author.surname}"></option>
       </select>
     </div>
-    <button type="submit" class="btn btn-primary">Add Book</button>
+    <button type="submit" class="btn btn-primary">Save</button>
   </form>
 </div>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

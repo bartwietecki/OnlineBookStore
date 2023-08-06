@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Book</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Edit Book</h1>
+    <form th:object="${bookModel}" th:action="@{/admin/books/edit}" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" th:field="*{id}">
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" class="form-control" th:field="*{title}">
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" class="form-control" th:field="*{description}"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="price">Price:</label>
+            <input type="text" id="price" name="price" class="form-control" th:field="*{price}">
+        </div>
+        <div class="form-group">
+            <label for="imageName">Image Name:</label>
+            <input type="text" id="imageName" name="imageName" class="form-control" th:field="*{imageName}">
+        </div>
+        <div class="form-group">
+            <label for="categoryId">Category:</label>
+            <select id="categoryId" name="categoryId" class="form-control" th:field="*{categoryId}">
+                <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="authorId">Author:</label>
+            <select id="authorId" name="authorId" class="form-control" th:field="*{authorId}">
+                <option th:each="author : ${authors}" th:value="${author.id}" th:text="${author.name + ' ' + author.surname}"></option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+</div>
+</body>
+</html>
