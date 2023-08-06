@@ -6,6 +6,7 @@ import com.onlinebookstore.repository.CategoryRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CategoryService {
@@ -17,31 +18,52 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
-    public Category addCategory(CategoryModel categoryModel) {
+    public List<CategoryModel> getAllCategories() {
+        List<Category> categories = categoryRepository.findAll();
+        return categories.stream()
+                .map(this::mapCategoryToCategoryModel)
+                .collect(Collectors.toList());
+    }
+
+    public CategoryModel addCategory(CategoryModel categoryModel) {
         Category category = new Category();
         category.setName(categoryModel.getName());
 
-        return categoryRepository.save(category);
+        Category savedCategory = categoryRepository.save(category);
+        return mapCategoryToCategoryModel(savedCategory);
     }
 
-    public List<Category> getAllCategories() {
-        return categoryRepository.findAll();
+    public CategoryModel getCategoryByName(String name) {
+        Category category = categoryRepository.findByName(name);
+        return mapCategoryToCategoryModel(category);
     }
 
-    public Category getCategoryByName(String name) {
-        return categoryRepository.findByName(name);
-    }
-
-    public Category getCategoryById(Long categoryId) {
-        return categoryRepository.findById(categoryId)
+    public CategoryModel getCategoryById(Long categoryId) {
+        Category category = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new IllegalArgumentException("Category with id " + categoryId + " not found"));
+        return mapCategoryToCategoryModel(category);
     }
 
-    public Category updateCategory(Category category) {
-        return categoryRepository.save(category);
+    // zamiast id mamy name
+    public CategoryModel updateCategory(CategoryModel categoryModel) {
+        Category category = categoryRepository.findByName(categoryModel.getName());
+        if (category == null) {
+            throw new IllegalArgumentException("Category with name " + categoryModel.getName() + " not found");
+        }
+
+        category.setName(categoryModel.getName());
+        Category updatedCategory = categoryRepository.save(category);
+        return mapCategoryToCategoryModel(updatedCategory);
     }
+
 
     public void deleteCategory(Long categoryId) {
         categoryRepository.deleteById(categoryId);
+    }
+
+    private CategoryModel mapCategoryToCategoryModel(Category category) {
+        CategoryModel categoryModel = new CategoryModel();
+        categoryModel.setName(category.getName());
+        return categoryModel;
     }
 }
