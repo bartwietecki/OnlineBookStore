@@ -58,7 +58,7 @@ public class AdminAuthorController {
 
     @PostMapping("/delete/{id}")
     public String deleteAuthor(@PathVariable Long id) {
-        authorService.deleteAuthorById(id);
+        authorService.deleteAuthor(id);
         return "redirect:/admin/authors";
     }
 }

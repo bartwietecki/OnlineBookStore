@@ -1,6 +1,5 @@
 package com.onlinebookstore.model;
 
-import com.onlinebookstore.entity.Author;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -16,7 +15,8 @@ public class BookModel {
     private LocalDateTime createDate;
     private Long categoryId;
     private Long authorId;
-    private String categoryName; // added categoryName to display product category in details
-    private String authorName; // added authorName to display product author in details
-    private String authorSurname; // added authorSurname to display product author in details
+
+    private String categoryName;
+    private String authorName;
+    private String authorSurname;
 }

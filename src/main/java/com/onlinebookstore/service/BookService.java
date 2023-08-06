@@ -7,16 +7,13 @@ import com.onlinebookstore.model.BookModel;
 import com.onlinebookstore.repository.AuthorRepository;
 import com.onlinebookstore.repository.BookRepository;
 import com.onlinebookstore.repository.CategoryRepository;
-import jakarta.servlet.http.HttpSession;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -45,7 +42,6 @@ public class BookService {
         this.authorRepository = authorRepository;
     }
 
-    //     metoda potrzebna do paginacji listy książek na stronie
     public Page<BookModel> getAllBooksPaged(int pageNumber, int pageSize) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
         Page<Book> bookPage = bookRepository.findAll(pageable);
@@ -57,15 +53,8 @@ public class BookService {
         return new PageImpl<>(bookModels, pageable, bookPage.getTotalElements());
     }
 
-    public List<BookModel> getBookModelsByCategory(String categoryName) {
-        Category category = categoryRepository.findByName(categoryName);
-        List<Book> books = bookRepository.findByCategory(category);
-        return books.stream()
-                .map(this::mapBookToBookModel)
-                .collect(Collectors.toList());
-    }
-
     public void addBook(BookModel bookModel, Long categoryId, Long authorId, MultipartFile file) {
+
         Category category = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new IllegalArgumentException("Category with id " + categoryId + " not found"));
 
@@ -77,7 +66,7 @@ public class BookService {
         book.setDescription(bookModel.getDescription());
         book.setPrice(bookModel.getPrice());
         book.setImageName(bookModel.getImageName());
-        book.setCreateDate(LocalDateTime.now()); // Ustawienie bieżącej daty utworzenia
+        book.setCreateDate(LocalDateTime.now());
         book.setCategory(category);
         book.setAuthor(author);
 
@@ -94,10 +83,9 @@ public class BookService {
         bookModel.setImageName(book.getImageName());
         bookModel.setCategoryId(book.getCategory().getId());
         bookModel.setAuthorId(book.getAuthor().getId());
-        bookModel.setCreateDate(book.getCreateDate()); // Przypisz datę utworzenia
+        bookModel.setCreateDate(book.getCreateDate());
         bookModel.setCategoryName(book.getCategory().getName());
 
-        // Ustawienie imienia i nazwiska autora
         Author author = book.getAuthor();
         if (author != null) {
             bookModel.setAuthorName(author.getName());
@@ -155,4 +143,37 @@ public class BookService {
         }
     }
 
+    // METODY DLA ADMINA
+    public List<BookModel> getAllBooks() {
+        List<Book> books = bookRepository.findAll();
+        return books.stream().map(this::mapBookToBookModel).collect(Collectors.toList());
+    }
+
+    public void updateBook(BookModel bookModel, Long categoryId, Long authorId) {
+        Optional<Book> oBook = bookRepository.findById(bookModel.getId());
+        if (oBook.isPresent()) {
+            Book book = oBook.get();
+            book.setTitle(bookModel.getTitle());
+            book.setDescription(bookModel.getDescription());
+            book.setPrice(bookModel.getPrice());
+            book.setImageName(bookModel.getImageName());
+            book.setCreateDate(bookModel.getCreateDate());
+
+            Category category = categoryRepository.findById(categoryId)
+                    .orElseThrow(() -> new IllegalArgumentException("Category with id " + bookModel.getCategoryId() + " not found"));
+            book.setCategory(category);
+
+            Author author = authorRepository.findById(authorId)
+                    .orElseThrow(() -> new IllegalArgumentException("Author with id " + bookModel.getAuthorId() + " not found"));
+            book.setAuthor(author);
+
+            bookRepository.save(book);
+        } else {
+            throw new EntityNotFoundException("Book with ID " + bookModel.getId() + " not found");
+        }
+    }
+
+    public void deleteBook(Long bookId) {
+        bookRepository.deleteById(bookId);
+    }
 }

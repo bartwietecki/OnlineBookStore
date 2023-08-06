@@ -16,13 +16,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     List<Book> findByCategory(Category category);
 
-
-    // AJAX SEARCH
-//    @Query(value="SELECT * FROM Book b WHERE b.title LIKE %:keyword%", nativeQuery = true)
-//    List<Book> findByKeyword(@Param("keyword") String keyword);
-
     @Query("SELECT b FROM Book b WHERE b.title LIKE %:keyword%")
-//    List<Book> findByKeyword(@Param("keyword") String keyword);
     Page<Book> findByKeyword(@Param("keyword") String keyword, Pageable pageable);
 }
 
