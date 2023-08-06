@@ -60,6 +60,7 @@ public class AuthorService {
 
     private AuthorModel mapAuthorToAuthorModel(Author author) {
         AuthorModel authorModel = new AuthorModel();
+        authorModel.setId(author.getId());
         authorModel.setName(author.getName());
         authorModel.setSurname(author.getSurname());
         return authorModel;

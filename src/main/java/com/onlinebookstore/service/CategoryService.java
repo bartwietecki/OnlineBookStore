@@ -63,6 +63,7 @@ public class CategoryService {
 
     private CategoryModel mapCategoryToCategoryModel(Category category) {
         CategoryModel categoryModel = new CategoryModel();
+        categoryModel.setId(category.getId());
         categoryModel.setName(category.getName());
         return categoryModel;
     }

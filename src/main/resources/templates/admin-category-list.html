@@ -23,12 +23,14 @@
         <table class="table">
             <thead>
             <tr>
+                <th>ID</th>
                 <th>Name</th>
                 <th>Action</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="category : ${categories}">
+                <td th:text="${category.id}"></td>
                 <td th:text="${category.name}"></td>
                 <td>
                     <a th:href="@{/admin/categories/edit/{id}(id=${category.id})}" class="btn btn-primary action-buttons">Edit</a>

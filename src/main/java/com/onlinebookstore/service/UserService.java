@@ -65,7 +65,9 @@ public class UserService {
 
         for (User user : users) {
             UserModel userModel = new UserModel();
+            userModel.setId(user.getId());
             userModel.setUsername(user.getUsername());
+            userModel.setPassword(user.getPassword());
             userModel.setEmail(user.getEmail());
             userModels.add(userModel);
         }
