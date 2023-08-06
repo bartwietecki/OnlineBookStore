@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderService {
@@ -60,6 +61,52 @@ public class OrderService {
         return orderRepository.save(order);
     }
 
-}
+    public List<OrderModel> getAllOrders() {
+        List<Order> orders = orderRepository.findAll();
+        return orders.stream().map(this::mapOrderToOrderModel).collect(Collectors.toList());
+    }
 
+    public OrderModel getOrderById(Long orderId) {
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new EntityNotFoundException("Order with id " + orderId + " not found"));
+        return mapOrderToOrderModel(order);
+    }
+
+    public OrderModel updateOrder(Long orderId, OrderModel updatedOrderModel) {
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new EntityNotFoundException("Order with id " + orderId + " not found"));
+
+        // Update the fields of the order based on the updatedOrderModel
+        order.setCustomerFullName(updatedOrderModel.getCustomerFullName());
+        order.setCustomerEmail(updatedOrderModel.getCustomerEmail());
+        order.setCity(updatedOrderModel.getCity());
+        order.setZipCode(updatedOrderModel.getZipCode());
+        order.setStreet(updatedOrderModel.getStreet());
+        order.setStreetNo(updatedOrderModel.getStreetNo());
+        order.setHomeNo(updatedOrderModel.getHomeNo());
+        order.setPrice(updatedOrderModel.getPrice());
+        order.setOrderStatus(updatedOrderModel.getOrderStatus());
+
+        return mapOrderToOrderModel(orderRepository.save(order));
+    }
+
+    public void deleteOrder(Long orderId) {
+        orderRepository.deleteById(orderId);
+    }
+
+    private OrderModel mapOrderToOrderModel(Order order) {
+        OrderModel orderModel = new OrderModel();
+        orderModel.setId(order.getId());
+        orderModel.setCustomerFullName(order.getCustomerFullName());
+        orderModel.setCustomerEmail(order.getCustomerEmail());
+        orderModel.setCity(order.getCity());
+        orderModel.setZipCode(order.getZipCode());
+        orderModel.setStreet(order.getStreet());
+        orderModel.setStreetNo(order.getStreetNo());
+        orderModel.setHomeNo(order.getHomeNo());
+        orderModel.setPrice(order.getPrice());
+        orderModel.setOrderStatus(order.getOrderStatus());
+        return orderModel;
+    }
+}
 
