@@ -3,19 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <title>Add Category</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0/css/bootstrap.min.css">
 </head>
 <body>
 <div class="container">
   <h1>Add Category</h1>
-  <form th:action="@{/admin/category/save}" th:object="${categoryModel}" method="post">
+  <form th:object="${categoryModel}" th:action="@{/admin/categories/save}" method="post">
     <div class="form-group">
-      <label for="name">Category Name</label>
-      <input type="text" class="form-control" id="name" th:field="*{name}" required>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" class="form-control" th:field="*{name}">
     </div>
-    <button type="submit" class="btn btn-primary">Add Category</button>
+    <button type="submit" class="btn btn-primary">Save</button>
   </form>
 </div>
 </body>
 </html>
+
 

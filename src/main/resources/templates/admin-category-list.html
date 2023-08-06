@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Admin Author List</title>
+    <title>Admin Category List</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0/css/bootstrap.min.css">
     <style>
         .table-container {
@@ -18,33 +18,28 @@
 <body>
 
 <div class="container">
-    <h1>Author List</h1>
+    <h1>Category List</h1>
     <div class="table-container">
         <table class="table">
             <thead>
             <tr>
                 <th>Name</th>
-                <th>Surname</th>
                 <th>Action</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="author : ${authors}">
-                <td th:text="${author.name}"></td>
-                <td th:text="${author.surname}"></td>
+            <tr th:each="category : ${categories}">
+                <td th:text="${category.name}"></td>
                 <td>
-                    <a th:href="@{/admin/authors/edit/{id}(id=${author.id})}" class="btn btn-primary action-buttons">Edit</a>
-                    <a th:href="@{/admin/authors/delete/{id}(id=${author.id})}" class="btn btn-danger action-buttons">Delete</a>
-<!--                    <form th:action="@{/admin/authors/delete/{id}(id=${author.id})}" method="post">-->
-<!--                        <button type="submit" class="btn btn-danger action-buttons">Delete</button>-->
-<!--                    </form>-->
+                    <a th:href="@{/admin/categories/edit/{id}(id=${category.id})}" class="btn btn-primary action-buttons">Edit</a>
+                    <a th:href="@{/admin/categories/delete/{id}(id=${category.id})}" class="btn btn-danger action-buttons">Delete</a>
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
     <div class="text-center">
-        <a th:href="@{/admin/authors/add}" class="btn btn-success">Add New Author</a>
+        <a th:href="@{/admin/categories/add}" class="btn btn-success">Add New Category</a>
         <a th:href="@{/admin}" class="btn btn-success">Go to Admin Page</a>
     </div>
 </div>
