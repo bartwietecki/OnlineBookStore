@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -26,7 +27,7 @@ public class UserService {
     }
 
     public void registerNewUser(UserModel userModel) {
-        if (userRepository.findUserByUsername(userModel.getUsername()) != null) {
+        if (userRepository.findByUsername(userModel.getUsername()) != null) {
             throw new IllegalArgumentException("Username is already taken");
         }
 
@@ -46,7 +47,7 @@ public class UserService {
     }
 
     public User loginUser(String username, String password) {
-        User user = userRepository.findUserByUsername(username);
+        User user = userRepository.findByUsername(username);
         if (user == null) {
             throw new IllegalArgumentException("User not found");
         }
@@ -65,10 +66,50 @@ public class UserService {
         for (User user : users) {
             UserModel userModel = new UserModel();
             userModel.setUsername(user.getUsername());
-            userModel.setPassword(user.getPassword());
             userModel.setEmail(user.getEmail());
             userModels.add(userModel);
         }
         return userModels;
     }
+
+    public UserModel getUserByUsername(String username) {
+        User user = userRepository.findByUsername(username);
+        if (user == null) {
+            throw new IllegalArgumentException("User not found");
+        }
+
+        UserModel userModel = new UserModel();
+        userModel.setUsername(user.getUsername());
+        userModel.setPassword(user.getPassword());
+        userModel.setEmail(user.getEmail());
+        return userModel;
+    }
+
+    public UserModel getUserById(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        UserModel userModel = new UserModel();
+        userModel.setUsername(user.getUsername());
+        userModel.setPassword(user.getPassword());
+        userModel.setEmail(user.getEmail());
+
+        return userModel;
+    }
+
+    public void updateUser(UserModel userModel) {
+        User user = userRepository.findById(userModel.getId())
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        user.setEmail(userModel.getEmail());
+        userRepository.save(user);
+    }
+
+    public void deleteUser(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        userRepository.delete(user);
+    }
 }
+
