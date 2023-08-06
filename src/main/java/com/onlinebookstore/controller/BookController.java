@@ -4,6 +4,7 @@ import com.onlinebookstore.entity.Author;
 import com.onlinebookstore.entity.Category;
 import com.onlinebookstore.model.AuthorModel;
 import com.onlinebookstore.model.BookModel;
+import com.onlinebookstore.model.CategoryModel;
 import com.onlinebookstore.service.AuthorService;
 import com.onlinebookstore.service.BookService;
 import com.onlinebookstore.service.CategoryService;
@@ -89,7 +90,7 @@ public class BookController {
 
     @GetMapping("/add")
     public String showAddBookForm(Model model) {
-        List<Category> categories = categoryService.getAllCategories();
+        List<CategoryModel> categories = categoryService.getAllCategories();
         List<AuthorModel> authors = authorService.getAllAuthors();
         model.addAttribute("bookModel", new BookModel());
         model.addAttribute("categories", categories);
