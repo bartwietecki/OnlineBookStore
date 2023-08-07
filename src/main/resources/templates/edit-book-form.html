@@ -29,13 +29,15 @@
         <div class="form-group">
             <label for="categoryId">Category:</label>
             <select id="categoryId" name="categoryId" class="form-control" th:field="*{categoryId}">
-                <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+                <option th:each="category : ${categories}" th:value="${category.id}"
+                        th:text="${category.name}"></option>
             </select>
         </div>
         <div class="form-group">
             <label for="authorId">Author:</label>
             <select id="authorId" name="authorId" class="form-control" th:field="*{authorId}">
-                <option th:each="author : ${authors}" th:value="${author.id}" th:text="${author.name + ' ' + author.surname}"></option>
+                <option th:each="author : ${authors}" th:value="${author.id}"
+                        th:text="${author.name + ' ' + author.surname}"></option>
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Update</button>

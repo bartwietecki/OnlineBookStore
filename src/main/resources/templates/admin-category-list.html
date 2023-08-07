@@ -4,16 +4,7 @@
     <meta charset="UTF-8">
     <title>Admin Category List</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0/css/bootstrap.min.css">
-    <style>
-        .table-container {
-            display: flex;
-            justify-content: center;
-        }
-
-        .action-buttons {
-            margin-right: 5px;
-        }
-    </style>
+    <link th:href="@{/css/admin-style.css}" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 
@@ -33,8 +24,10 @@
                 <td th:text="${category.id}"></td>
                 <td th:text="${category.name}"></td>
                 <td>
-                    <a th:href="@{/admin/categories/edit/{id}(id=${category.id})}" class="btn btn-primary action-buttons">Edit</a>
-                    <a th:href="@{/admin/categories/delete/{id}(id=${category.id})}" class="btn btn-danger action-buttons">Delete</a>
+                    <a th:href="@{/admin/categories/edit/{id}(id=${category.id})}"
+                       class="btn btn-primary action-buttons">Edit</a>
+                    <a th:href="@{/admin/categories/delete/{id}(id=${category.id})}"
+                       class="btn btn-danger action-buttons">Delete</a>
                 </td>
             </tr>
             </tbody>

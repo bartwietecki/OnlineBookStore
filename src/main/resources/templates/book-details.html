@@ -5,160 +5,11 @@
     <title>Book Details</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        body {
-            background-color: #f6f6f6;
-            margin-bottom: 20px;
-        }
-
-        .book-details-container {
-            max-width: 800px;
-            margin: 20px auto;
-            text-align: center;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .book-title {
-            font-size: 30px;
-            font-weight: bold;
-            color: black;
-            margin-bottom: 10px;
-        }
-
-        .book-author {
-            font-size: 25px;
-            color: black;
-            margin-bottom: 10px;
-        }
-
-        .book-category {
-            font-size: 20px;
-            color: black;
-            margin-bottom: 10px;
-            font-style: italic;
-        }
-
-        .book-image {
-            max-height: 500px;
-            width: 100%;
-            object-fit: cover;
-            margin-bottom: 10px;
-        }
-
-        .product-image {
-            max-width: 400px;
-            max-height: 400px;
-            width: auto;
-            height: auto;
-            margin-bottom: 10px;
-            border: 1px solid black;
-            object-fit: cover;
-        }
-
-        .book-description {
-            font-size: 25px;
-            margin-bottom: 20px;
-        }
-
-        .book-price {
-            font-size: 25px;
-            font-weight: bold;
-            color: black;
-        }
-
-        .navbar {
-            background-color: darkgray;
-            padding: 5px;
-        }
-
-        .navbar-brand {
-            font-size: 35px;
-            color: black;
-            margin-top: 10px;
-            margin-bottom: 10px;
-            margin-left: 10px;
-        }
-
-        .navbar-nav .nav-link {
-            font-size: 20px;
-            color: black;
-            margin-top: 10px;
-            margin-bottom: 10px;
-        }
-
-        .back-btn {
-            position: absolute;
-            top: 120px;
-            left: 10px;
-            background-color: black;
-            color: white;
-            border: 1px solid black;
-            border-radius: 5px;
-            transition: background-color 0.2s, border-color 0.2s, color 0.2s;
-            padding: 8px 15px;
-            text-decoration: none;
-        }
-
-        .back-btn:hover {
-            background-color: white;
-            color: black;
-            border-color: black;
-        }
-
-        .cart-btn {
-            background-color: black;
-            color: white;
-            border: 1px solid black;
-            border-radius: 5px;
-            transition: background-color 0.2s, border-color 0.2s, color 0.2s;
-            padding: 8px 15px;
-            text-decoration: none;
-        }
-
-        .cart-btn:hover {
-            background-color: white;
-            color: black;
-            border-color: black;
-        }
-    </style>
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 
-<!--FRAGMENT-->
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/books">Online Book Store</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <!--                <li class="nav-item">-->
-                <!--                    <a class="nav-link" href="#">Edit Account</a>-->
-                <!--                </li>-->
-                <!--                <li class="nav-item">-->
-                <!--                    <a class="nav-link" href="#">My Orders</a>-->
-                <!--                </li>-->
-                <li class="nav-item">
-                    <a class="nav-link" href="/cart">Cart <i class="fas fa-shopping-cart"></i>
-                        <span class="badge text-bg-secondary" th:text="'( ' + ${cartSize} + ' )'"
-                              style="color: black;"></span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact Us <i class="fas fa-phone-alt"></i></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/login}">Log Out <i class="fas fa-sign-out-alt"></i></a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<div th:replace="~{fragments/navbar::nav}"></div>
 
 <div class="container mt-3">
     <a href="/books" class="back-btn">Back</a>
@@ -172,7 +23,7 @@
         <p class="book-description" th:text="${book.description}">Product Description</p>
         <p class="book-price" th:text="${book.price + ' zł'}">Product Price</p>
         <form th:action="@{/cart/save}" method="post">
-            <input type="hidden" name="bookId" th:value="${book.id}" />
+            <input type="hidden" name="bookId" th:value="${book.id}"/>
             <button type="submit" class="cart-btn">Add to Cart</button>
         </form>
     </div>

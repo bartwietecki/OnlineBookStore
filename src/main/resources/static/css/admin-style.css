@@ -1,0 +1,29 @@
+.navbar {
+    background-color: dodgerblue;
+    padding: 5px;
+}
+
+.navbar-brand {
+    font-size: 35px;
+    color: black;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+.navbar-nav .nav-link {
+    font-size: 20px;
+    color: black;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.table-container {
+    display: flex;
+    justify-content: center;
+}
+
+.action-buttons {
+    margin-right: 5px;
+}
+

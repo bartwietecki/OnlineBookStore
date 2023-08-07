@@ -7,6 +7,7 @@ import com.onlinebookstore.repository.RoleRepository;
 import com.onlinebookstore.repository.UserRepository;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 //import org.springframework.security.crypto.password.PasswordEncoder;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -67,7 +68,7 @@ public class UserService {
 
     public UserModel getUserById(Long id) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
 
         UserModel userModel = new UserModel();
         userModel.setUsername(user.getUsername());
@@ -79,7 +80,7 @@ public class UserService {
 
     public void updateUser(UserModel userModel) {
         User user = userRepository.findById(userModel.getId())
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
 
         user.setUsername(userModel.getUsername());
         // password

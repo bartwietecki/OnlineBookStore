@@ -1,39 +1,34 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Admin Role List</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0/css/bootstrap.min.css">
-  <style>
-    .table-container {
-      display: flex;
-      justify-content: center;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Admin Role List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0/css/bootstrap.min.css">
+    <link th:href="@{/css/admin-style.css}" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 
 <div class="container">
-  <h1>Role List</h1>
-  <div class="table-container">
-    <table class="table">
-      <thead>
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr th:each="role : ${roles}">
-        <td th:text="${role.id}"></td>
-        <td th:text="${role.name}"></td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="text-center">
-    <a th:href="@{/admin}" class="btn btn-success">Go to Admin Page</a>
-  </div>
+    <h1>Role List</h1>
+    <div class="table-container">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="role : ${roles}">
+                <td th:text="${role.id}"></td>
+                <td th:text="${role.name}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <a th:href="@{/admin}" class="btn btn-success">Go to Admin Page</a>
+    </div>
 </div>
 </body>
 </html>

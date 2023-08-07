@@ -1,53 +1,54 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Edit Order</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <title>Edit Order</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0/css/bootstrap.min.css">
 </head>
 <body>
 <div class="container">
-  <h1>Edit Order</h1>
-  <form th:object="${order}" th:action="@{/admin/orders/edit/{orderId}(orderId=${order.id})}" method="post">
-    <input type="hidden" name="id" th:field="*{id}">
-    <div class="form-group">
-      <label for="customerFullName">Customer Full Name:</label>
-      <input type="text" id="customerFullName" name="customerFullName" class="form-control" th:field="*{customerFullName}">
-    </div>
-    <div class="form-group">
-      <label for="customerEmail">Customer Email:</label>
-      <input type="text" id="customerEmail" name="customerEmail" class="form-control" th:field="*{customerEmail}">
-    </div>
-    <div class="form-group">
-      <label for="city">City:</label>
-      <input type="text" id="city" name="city" class="form-control" th:field="*{city}">
-    </div>
-    <div class="form-group">
-      <label for="zipCode">Zip Code:</label>
-      <input type="text" id="zipCode" name="zipCode" class="form-control" th:field="*{zipCode}">
-    </div>
-    <div class="form-group">
-      <label for="street">Street:</label>
-      <input type="text" id="street" name="street" class="form-control" th:field="*{street}">
-    </div>
-    <div class="form-group">
-      <label for="streetNo">Street No:</label>
-      <input type="text" id="streetNo" name="streetNo" class="form-control" th:field="*{streetNo}">
-    </div>
-    <div class="form-group">
-      <label for="homeNo">Home No:</label>
-      <input type="text" id="homeNo" name="homeNo" class="form-control" th:field="*{homeNo}">
-    </div>
-    <div class="form-group">
-      <label for="price">Price:</label>
-      <input type="text" id="price" name="price" class="form-control" th:field="*{price}">
-    </div>
-    <div class="form-group">
-      <label for="orderStatus">Order Status:</label>
-      <input type="text" id="orderStatus" name="orderStatus" class="form-control" th:field="*{orderStatus}">
-    </div>
-    <button type="submit" class="btn btn-primary">Update</button>
-  </form>
+    <h1>Edit Order</h1>
+    <form th:object="${order}" th:action="@{/admin/orders/edit/{orderId}(orderId=${order.id})}" method="post">
+        <input type="hidden" name="id" th:field="*{id}">
+        <div class="form-group">
+            <label for="customerFullName">Customer Full Name:</label>
+            <input type="text" id="customerFullName" name="customerFullName" class="form-control"
+                   th:field="*{customerFullName}">
+        </div>
+        <div class="form-group">
+            <label for="customerEmail">Customer Email:</label>
+            <input type="text" id="customerEmail" name="customerEmail" class="form-control" th:field="*{customerEmail}">
+        </div>
+        <div class="form-group">
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" class="form-control" th:field="*{city}">
+        </div>
+        <div class="form-group">
+            <label for="zipCode">Zip Code:</label>
+            <input type="text" id="zipCode" name="zipCode" class="form-control" th:field="*{zipCode}">
+        </div>
+        <div class="form-group">
+            <label for="street">Street:</label>
+            <input type="text" id="street" name="street" class="form-control" th:field="*{street}">
+        </div>
+        <div class="form-group">
+            <label for="streetNo">Street No:</label>
+            <input type="text" id="streetNo" name="streetNo" class="form-control" th:field="*{streetNo}">
+        </div>
+        <div class="form-group">
+            <label for="homeNo">Home No:</label>
+            <input type="text" id="homeNo" name="homeNo" class="form-control" th:field="*{homeNo}">
+        </div>
+        <div class="form-group">
+            <label for="price">Price:</label>
+            <input type="text" id="price" name="price" class="form-control" th:field="*{price}">
+        </div>
+        <div class="form-group">
+            <label for="orderStatus">Order Status:</label>
+            <input type="text" id="orderStatus" name="orderStatus" class="form-control" th:field="*{orderStatus}">
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
 </div>
 </body>
 </html>
