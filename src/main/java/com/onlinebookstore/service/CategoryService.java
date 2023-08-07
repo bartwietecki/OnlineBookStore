@@ -7,6 +7,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -39,13 +40,15 @@ public class CategoryService {
     }
 
     public void updateCategory(CategoryModel categoryModel) {
-        Category category = categoryRepository.findByName(categoryModel.getName());
-        if (category == null) {
+        Optional<Category> oCategory = categoryRepository.findById(categoryModel.getId());
+        if (oCategory.isPresent()) {
+            Category category = oCategory.get();
+            category.setName(categoryModel.getName());
+            categoryRepository.save(category);
+
+        } else {
             throw new EntityNotFoundException("Category with name " + categoryModel.getName() + " not found");
         }
-
-        category.setName(categoryModel.getName());
-        categoryRepository.save(category);
     }
 
     public void deleteCategory(Long id) {

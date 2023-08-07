@@ -28,7 +28,6 @@
     <div class="row row-cols-1 row-cols-md-3 g-4">
         <div class="col" th:each="book : ${pagedBooks.content}">
             <div class="card product-card">
-
                 <a th:href="@{/books/details/{bookId}(bookId=${book.id})}">
                     <img th:src="@{/uploads/__${book.getImageName()}__}" class="responsive card-img-top product-image"/>
                 </a>

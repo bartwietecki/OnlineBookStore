@@ -17,9 +17,7 @@
         <h1 class="book-title" th:text="${book.title}">Product Title</h1>
         <p class="book-author" th:text="${book.authorName + ' ' + book.authorSurname}">Product Author</p>
         <p class="book-category" th:text="${categoryName}">Product Category</p>
-
         <img th:src="@{/uploads/__${book.getImageName()}__}" class="responsive card-img-top product-image"/>
-
         <p class="book-description" th:text="${book.description}">Product Description</p>
         <p class="book-price" th:text="${book.price + ' zł'}">Product Price</p>
         <form th:action="@{/cart/save}" method="post">

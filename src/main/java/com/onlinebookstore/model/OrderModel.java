@@ -1,11 +1,13 @@
 package com.onlinebookstore.model;
 
+import com.onlinebookstore.entity.Book;
 import com.onlinebookstore.entity.OrderStatus;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 public class OrderModel {
@@ -25,4 +27,7 @@ public class OrderModel {
     private String homeNo;
     private BigDecimal price;
     private OrderStatus orderStatus;
+
+
+    private List<Book> books;
 }

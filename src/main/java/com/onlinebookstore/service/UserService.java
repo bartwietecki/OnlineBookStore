@@ -11,6 +11,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -71,6 +72,7 @@ public class UserService {
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
 
         UserModel userModel = new UserModel();
+        userModel.setId(user.getId());
         userModel.setUsername(user.getUsername());
         userModel.setPassword(user.getPassword());
         userModel.setEmail(user.getEmail());
@@ -79,13 +81,18 @@ public class UserService {
     }
 
     public void updateUser(UserModel userModel) {
-        User user = userRepository.findById(userModel.getId())
-                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+        Optional<User> oUser = userRepository.findById(userModel.getId());
+        oUser.ifPresent(user -> {
+            user.setUsername(userModel.getUsername());
+            // password
+            user.setEmail(userModel.getEmail());
 
-        user.setUsername(userModel.getUsername());
-        // password
-        user.setEmail(userModel.getEmail());
-        userRepository.save(user);
+            userRepository.save(user);
+        });
+
+        if (oUser.isEmpty()) {
+            throw new EntityNotFoundException("User with ID " + userModel.getId() + " not found");
+        }
     }
 
     public void deleteUser(Long id) {

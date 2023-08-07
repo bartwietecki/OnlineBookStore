@@ -17,7 +17,9 @@
                 <th>ID</th>
                 <th>Name</th>
                 <th>Surname</th>
-                <th>Action</th>
+<!--                <th>Action</th>-->
+                <th>Edit</th>
+                <th>Delete</th>
             </tr>
             </thead>
             <tbody>
@@ -26,11 +28,13 @@
                 <td th:text="${author.name}"></td>
                 <td th:text="${author.surname}"></td>
                 <td>
-                    <a th:href="@{/admin/authors/edit/{id}(id=${author.id})}" class="btn btn-primary action-buttons">Edit</a>
-                    <a th:href="@{/admin/authors/delete/{id}(id=${author.id})}" class="btn btn-danger action-buttons">Delete</a>
-                    <!--                    <form th:action="@{/admin/authors/delete/{id}(id=${author.id})}" method="post">-->
-                    <!--                        <button type="submit" class="btn btn-danger action-buttons">Delete</button>-->
-                    <!--                    </form>-->
+                    <a th:href="@{/admin/authors/edit/{id}(id=${author.id})}"
+                       class="btn btn-primary action-buttons">Edit</a>
+                </td>
+                <td>
+                    <form th:action="@{/admin/authors/delete/{id}(id=${author.id})}" method="post">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
                 </td>
             </tr>
             </tbody>

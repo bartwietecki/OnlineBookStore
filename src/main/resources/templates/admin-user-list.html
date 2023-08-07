@@ -18,6 +18,8 @@
                 <th>Username</th>
                 <th>Password</th>
                 <th>Email</th>
+                <th>Edit</th>
+                <th>Delete</th>
             </tr>
             </thead>
             <tbody>
@@ -29,10 +31,11 @@
                 <td>
                     <a th:href="@{/admin/users/edit/{id}(id=${user.id})}"
                        class="btn btn-primary action-buttons">Edit</a>
-                    <a th:href="@{/admin/authors/delete/{id}(id=${user.id})}" class="btn btn-danger action-buttons">Delete</a>
-                    <!--                    <form th:action="@{/admin/authors/delete/{id}(id=${author.id})}" method="post">-->
-                    <!--                        <button type="submit" class="btn btn-danger action-buttons">Delete</button>-->
-                    <!--                    </form>-->
+                </td>
+                <td>
+                    <form th:action="@{/admin/users/delete/{id}(id=${user.id})}" method="post">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
                 </td>
             </tr>
             </tbody>

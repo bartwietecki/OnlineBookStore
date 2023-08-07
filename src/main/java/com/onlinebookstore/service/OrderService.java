@@ -88,8 +88,16 @@ public class OrderService {
     private OrderModel mapOrderToOrderModel(Order order) {
         OrderModel orderModel = new OrderModel();
         orderModel.setId(order.getId());
-        copyOrderDataForMakeOrder(order, orderModel);
-        copyOrderDataForOtherMethods(order, orderModel);
+        orderModel.setCustomerFullName(order.getCustomerFullName());
+        orderModel.setCustomerEmail(order.getCustomerEmail());
+        orderModel.setCity(order.getCity());
+        orderModel.setZipCode(order.getZipCode());
+        orderModel.setStreet(order.getStreet());
+        orderModel.setStreetNo(order.getStreetNo());
+        orderModel.setHomeNo(order.getHomeNo());
+        orderModel.setPrice(order.getPrice());
+        orderModel.setOrderStatus(order.getOrderStatus());
+
         return orderModel;
     }
 

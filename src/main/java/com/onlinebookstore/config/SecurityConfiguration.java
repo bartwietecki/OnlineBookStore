@@ -29,17 +29,17 @@
 //        return new BCryptPasswordEncoder();
 //    }
 //
-//@Override
-//protected void configure(HttpSecurity http) throws Exception {
-//        http
-//        // Pozostała konfiguracja
+////@Override
+////protected void configure(HttpSecurity http) throws Exception {
+////        http
+////        // Pozostała konfiguracja
+////
+////        // Dodaj konfigurację dla wylogowania
+////        .logout()
+////        .logoutUrl("/logout")
+////        .logoutSuccessUrl("/login") // Przekierowanie po wylogowaniu
+////        .invalidateHttpSession(true)
+////        .deleteCookies("JSESSIONID");
+////        }
 //
-//        // Dodaj konfigurację dla wylogowania
-//        .logout()
-//        .logoutUrl("/logout")
-//        .logoutSuccessUrl("/login") // Przekierowanie po wylogowaniu
-//        .invalidateHttpSession(true)
-//        .deleteCookies("JSESSIONID");
-//        }
-
 //}

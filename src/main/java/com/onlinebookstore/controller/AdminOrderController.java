@@ -33,7 +33,6 @@ public class AdminOrderController {
     }
 
     @PostMapping("/edit/{id}")
-//    @PostMapping("/update")
     public String updateOrder(@PathVariable Long id, @ModelAttribute OrderModel updatedOrderModel) {
         orderService.updateOrder(id, updatedOrderModel);
         return "redirect:/admin/orders";

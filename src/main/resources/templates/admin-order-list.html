@@ -38,7 +38,7 @@
             <td th:text="${order.price}"></td>
             <td th:text="${order.orderStatus}"></td>
             <td>
-                <form th:action="@{/admin/orders/edit/{orderId}(orderId=${order.id})}" method="post">
+                <form th:action="@{/admin/orders/edit/{orderId}(orderId=${order.id})}">
                     <button type="submit" class="btn btn-primary">Edit</button>
                 </form>
             </td>

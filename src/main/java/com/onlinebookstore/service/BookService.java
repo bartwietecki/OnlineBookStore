@@ -127,7 +127,7 @@ public class BookService {
             book.setDescription(bookModel.getDescription());
             book.setPrice(bookModel.getPrice());
             book.setImageName(bookModel.getImageName());
-            book.setCreateDate(bookModel.getCreateDate());
+            book.setCreateDate(LocalDateTime.now());
 
             Category category = categoryRepository.findById(categoryId)
                     .orElseThrow(() -> new IllegalArgumentException("Category with id " + bookModel.getCategoryId() + " not found"));

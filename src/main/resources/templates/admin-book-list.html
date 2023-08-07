@@ -21,7 +21,8 @@
                 <th>Image</th>
                 <th>Category</th>
                 <th>Author</th>
-                <th>Action</th>
+                <th>Edit</th>
+                <th>Delete</th>
             </tr>
             </thead>
             <tbody>
@@ -36,8 +37,11 @@
                 <td>
                     <a th:href="@{/admin/books/edit/{id}(id=${book.id})}"
                        class="btn btn-primary action-buttons">Edit</a>
-                    <a th:href="@{/admin/books/delete/{id}(id=${book.id})}"
-                       class="btn btn-danger action-buttons">Delete</a>
+                </td>
+                <td>
+                    <form th:action="@{/admin/books/delete/{id}(id=${book.id})}" method="post">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
                 </td>
             </tr>
             </tbody>
