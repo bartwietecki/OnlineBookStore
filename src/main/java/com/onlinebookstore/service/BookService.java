@@ -53,6 +53,11 @@ public class BookService {
         return new PageImpl<>(bookModels, pageable, bookPage.getTotalElements());
     }
 
+    public List<BookModel> getAllBooks() {
+        List<Book> books = bookRepository.findAll();
+        return books.stream().map(this::mapBookToBookModel).collect(Collectors.toList());
+    }
+
     public void addBook(BookModel bookModel, Long categoryId, Long authorId, MultipartFile file) {
 
         Category category = categoryRepository.findById(categoryId)
@@ -74,27 +79,6 @@ public class BookService {
         saveBookImage(file);
     }
 
-    private BookModel mapBookToBookModel(Book book) {
-        BookModel bookModel = new BookModel();
-        bookModel.setId(book.getId());
-        bookModel.setTitle(book.getTitle());
-        bookModel.setDescription(book.getDescription());
-        bookModel.setPrice(book.getPrice());
-        bookModel.setImageName(book.getImageName());
-        bookModel.setCategoryId(book.getCategory().getId());
-        bookModel.setAuthorId(book.getAuthor().getId());
-        bookModel.setCreateDate(book.getCreateDate());
-        bookModel.setCategoryName(book.getCategory().getName());
-
-        Author author = book.getAuthor();
-        if (author != null) {
-            bookModel.setAuthorName(author.getName());
-            bookModel.setAuthorSurname(author.getSurname());
-        }
-
-        return bookModel;
-    }
-
     public Page<BookModel> getBooksByKeyword(String keyword, int pageNumber, int pageSize) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
         Page<Book> bookPage = bookRepository.findByKeyword(keyword, pageable);
@@ -102,6 +86,10 @@ public class BookService {
         List<BookModel> bookModels = bookPage.getContent().stream()
                 .map(this::mapBookToBookModel)
                 .collect(Collectors.toList());
+
+//        if (bookModels.isEmpty()) {
+//            throw new EntityNotFoundException("No books found for the keyword: " + keyword);
+//        }
 
         return new PageImpl<>(bookModels, pageable, bookPage.getTotalElements());
     }
@@ -125,28 +113,10 @@ public class BookService {
                     .orElse("Unknown Author");
             result.put("authorName", authorName);
         } else {
-            // here I can handle the situation when the book with the given id was not found
-            result.put("book", null);
-            result.put("categoryName", "Unknown Category");
-            result.put("authorName", "Unknown Author");
+            throw new EntityNotFoundException("Book with ID " + bookId + " not found");
         }
 
         return result;
-    }
-
-    private void saveBookImage(MultipartFile file) {
-        Path uploads = Paths.get("./uploads");
-        try {
-            Files.copy(file.getInputStream(), uploads.resolve(file.getOriginalFilename()));
-        } catch (IOException e) {
-            log.error(e.getMessage());
-        }
-    }
-
-    // METODY DLA ADMINA
-    public List<BookModel> getAllBooks() {
-        List<Book> books = bookRepository.findAll();
-        return books.stream().map(this::mapBookToBookModel).collect(Collectors.toList());
     }
 
     public void updateBook(BookModel bookModel, Long categoryId, Long authorId) {
@@ -175,5 +145,42 @@ public class BookService {
 
     public void deleteBook(Long bookId) {
         bookRepository.deleteById(bookId);
+    }
+
+    // TODO
+    // Finish saveBookImage() method
+    private void saveBookImage(MultipartFile file) {
+        Path uploads = Paths.get("./uploads");
+        try {
+            Files.copy(file.getInputStream(), uploads.resolve(file.getOriginalFilename()));
+        } catch (IOException e) {
+            log.error(e.getMessage());
+        }
+    }
+
+    private BookModel mapBookToBookModel(Book book) {
+        BookModel bookModel = new BookModel();
+        bookModel.setId(book.getId());
+        bookModel.setTitle(book.getTitle());
+        bookModel.setDescription(book.getDescription());
+        bookModel.setPrice(book.getPrice());
+        bookModel.setImageName(book.getImageName());
+        bookModel.setCategoryId(book.getCategory().getId());
+        bookModel.setAuthorId(book.getAuthor().getId());
+        bookModel.setCreateDate(book.getCreateDate());
+        bookModel.setCategoryName(book.getCategory().getName());
+
+        Category category = book.getCategory();
+        if (category != null) {
+            bookModel.setCategoryName(category.getName());
+        }
+
+        Author author = book.getAuthor();
+        if (author != null) {
+            bookModel.setAuthorName(author.getName());
+            bookModel.setAuthorSurname(author.getSurname());
+        }
+
+        return bookModel;
     }
 }

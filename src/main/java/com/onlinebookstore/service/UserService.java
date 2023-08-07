@@ -9,7 +9,6 @@ import com.onlinebookstore.repository.UserRepository;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -61,30 +60,9 @@ public class UserService {
 
     public List<UserModel> getAllUsers() {
         List<User> users = userRepository.findAll();
-        List<UserModel> userModels = new ArrayList<>();
-
-        for (User user : users) {
-            UserModel userModel = new UserModel();
-            userModel.setId(user.getId());
-            userModel.setUsername(user.getUsername());
-            userModel.setPassword(user.getPassword());
-            userModel.setEmail(user.getEmail());
-            userModels.add(userModel);
-        }
-        return userModels;
-    }
-
-    public UserModel getUserByUsername(String username) {
-        User user = userRepository.findByUsername(username);
-        if (user == null) {
-            throw new IllegalArgumentException("User not found");
-        }
-
-        UserModel userModel = new UserModel();
-        userModel.setUsername(user.getUsername());
-        userModel.setPassword(user.getPassword());
-        userModel.setEmail(user.getEmail());
-        return userModel;
+        return users.stream()
+                .map(this::mapUserToUserModel)
+                .collect(Collectors.toList());
     }
 
     public UserModel getUserById(Long id) {
@@ -103,15 +81,22 @@ public class UserService {
         User user = userRepository.findById(userModel.getId())
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
+        user.setUsername(userModel.getUsername());
+        // password
         user.setEmail(userModel.getEmail());
         userRepository.save(user);
     }
 
-    public void deleteUser(Long userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+    public void deleteUser(Long id) {
+        userRepository.deleteById(id);
+    }
 
-        userRepository.delete(user);
+    private UserModel mapUserToUserModel(User user) {
+        UserModel userModel = new UserModel();
+        userModel.setId(user.getId());
+        userModel.setUsername(user.getUsername());
+        userModel.setPassword(user.getPassword());
+        userModel.setEmail(user.getEmail());
+        return userModel;
     }
 }
-

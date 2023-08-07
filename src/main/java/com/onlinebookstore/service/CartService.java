@@ -2,9 +2,10 @@ package com.onlinebookstore.service;
 
 import com.onlinebookstore.entity.Author;
 import com.onlinebookstore.entity.Book;
-import com.onlinebookstore.model.BookModel;
 import com.onlinebookstore.entity.CartOperation;
+import com.onlinebookstore.model.BookModel;
 import com.onlinebookstore.repository.BookRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,8 +38,10 @@ public class CartService {
                 case INCREASE -> shoppingCart.addToCart(mapBookToBookModel(book));
                 case DECREASE -> shoppingCart.decreaseBook(mapBookToBookModel(book));
                 case REMOVE -> shoppingCart.removeAllBooks(mapBookToBookModel(book));
-                default -> throw new IllegalArgumentException();
+                default -> throw new IllegalArgumentException("Invalid cart operation");
             }
+        } else {
+            throw new EntityNotFoundException("Book with ID " + bookId + " not found");
         }
     }
 
@@ -65,4 +68,3 @@ public class CartService {
         return bookModel;
     }
 }
-

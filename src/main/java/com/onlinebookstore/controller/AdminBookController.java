@@ -6,7 +6,6 @@ import com.onlinebookstore.model.CategoryModel;
 import com.onlinebookstore.service.AuthorService;
 import com.onlinebookstore.service.BookService;
 import com.onlinebookstore.service.CategoryService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +14,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 import java.util.Map;
 
-@Slf4j
 @Controller
 @RequestMapping("/admin/books")
 public class AdminBookController {

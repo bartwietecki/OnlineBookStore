@@ -1,7 +1,5 @@
 package com.onlinebookstore.controller;
 
-import com.onlinebookstore.entity.Role;
-import com.onlinebookstore.entity.User;
 import com.onlinebookstore.model.UserModel;
 import com.onlinebookstore.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class RegistrationController {
 
     private final UserService userService;
-
 
     public RegistrationController(UserService userService) {
         this.userService = userService;
@@ -31,9 +28,7 @@ public class RegistrationController {
         userService.registerNewUser(userModel);
         return "redirect:/login";
     }
-
 }
-
 //    @PostMapping("/register")
 //    public String processRegistrationForm(@ModelAttribute("userModel") UserModel userModel) {
 //        // Map UserModel to User entity
@@ -51,5 +46,3 @@ public class RegistrationController {
 //
 //        return "redirect:/login";
 //    }
-
-

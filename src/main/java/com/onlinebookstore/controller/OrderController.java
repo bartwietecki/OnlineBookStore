@@ -38,5 +38,4 @@ public class OrderController {
         model.addAttribute("cartSize", shoppingCart.getCartSize());
         return "summary";
     }
-
 }

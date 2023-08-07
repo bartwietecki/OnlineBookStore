@@ -86,5 +86,4 @@ public class ShoppingCart {
         totalCost = new BigDecimal(0);
         cartBooks.clear();
     }
-
 }

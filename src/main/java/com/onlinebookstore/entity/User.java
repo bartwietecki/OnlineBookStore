@@ -23,4 +23,6 @@ public class User {
     @JoinColumn(name = "role_id")
     private Role role;
 
+    //TODO
+    // add methods to set password with BCrypt and to verify password with BCrypt
 }

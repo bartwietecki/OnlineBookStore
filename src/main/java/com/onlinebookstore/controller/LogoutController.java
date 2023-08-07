@@ -10,8 +10,8 @@ public class LogoutController {
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.removeAttribute("userId");
-        session.removeAttribute("userId");
-        session.removeAttribute("userId");
+        session.removeAttribute("username");
+        session.removeAttribute("role");
 
         return "redirect:/login";
     }

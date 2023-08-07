@@ -1,8 +1,6 @@
 package com.onlinebookstore.model;
 
-import com.onlinebookstore.entity.User;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 public class UserModel {
@@ -11,3 +9,6 @@ public class UserModel {
     private String password;
     private String email;
 }
+
+//TODO
+// Bcrypt password

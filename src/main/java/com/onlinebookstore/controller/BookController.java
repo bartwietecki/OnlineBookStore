@@ -31,7 +31,7 @@ public class BookController {
                            @RequestParam(required = false) String keyword,
                            Model model) {
 
-        if(keyword != null && !keyword.isEmpty()) {
+        if (keyword != null && !keyword.isEmpty()) {
             Page<BookModel> pagedBooks = bookService.getBooksByKeyword(keyword, page, size);
             model.addAttribute("pagedBooks", pagedBooks);
             model.addAttribute("keyword", keyword);
@@ -62,6 +62,3 @@ public class BookController {
         return "book-details";
     }
 }
-
-
-

@@ -21,26 +21,27 @@ public class AuthorService {
 
     public List<AuthorModel> getAllAuthors() {
         List<Author> authors = authorRepository.findAll();
-        return authors.stream().map(this::mapAuthorToAuthorModel).collect(Collectors.toList());
+        return authors.stream()
+                .map(this::mapAuthorToAuthorModel)
+                .collect(Collectors.toList());
     }
 
-    public AuthorModel addAuthor(AuthorModel authorModel) {
+    public void addAuthor(AuthorModel authorModel) {
         Author author = mapAuthorModelToAuthor(authorModel);
-        return mapAuthorToAuthorModel(authorRepository.save(author));
+        authorRepository.save(author);
     }
 
     public Optional<AuthorModel> getAuthorById(Long id) {
         return authorRepository.findById(id).map(this::mapAuthorToAuthorModel);
     }
 
-    public AuthorModel updateAuthor(AuthorModel authorModel) {
+    public void updateAuthor(AuthorModel authorModel) {
         Optional<Author> oAuthor = authorRepository.findById(authorModel.getId());
         if (oAuthor.isPresent()) {
             Author author = oAuthor.get();
             author.setName(authorModel.getName());
             author.setSurname(authorModel.getSurname());
-            author = authorRepository.save(author);
-            return mapAuthorToAuthorModel(author);
+            authorRepository.save(author);
         } else {
             throw new EntityNotFoundException("Author with ID " + authorModel.getId() + " not found");
         }

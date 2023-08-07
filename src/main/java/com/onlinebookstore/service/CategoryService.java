@@ -3,6 +3,7 @@ package com.onlinebookstore.service;
 import com.onlinebookstore.entity.Category;
 import com.onlinebookstore.model.CategoryModel;
 import com.onlinebookstore.repository.CategoryRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,7 +13,6 @@ import java.util.stream.Collectors;
 public class CategoryService {
 
     private final CategoryRepository categoryRepository;
-
 
     public CategoryService(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
@@ -25,40 +25,31 @@ public class CategoryService {
                 .collect(Collectors.toList());
     }
 
-    public CategoryModel addCategory(CategoryModel categoryModel) {
+    public void addCategory(CategoryModel categoryModel) {
         Category category = new Category();
         category.setName(categoryModel.getName());
 
-        Category savedCategory = categoryRepository.save(category);
-        return mapCategoryToCategoryModel(savedCategory);
-    }
-
-    public CategoryModel getCategoryByName(String name) {
-        Category category = categoryRepository.findByName(name);
-        return mapCategoryToCategoryModel(category);
+        categoryRepository.save(category);
     }
 
     public CategoryModel getCategoryById(Long categoryId) {
         Category category = categoryRepository.findById(categoryId)
-                .orElseThrow(() -> new IllegalArgumentException("Category with id " + categoryId + " not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Category with ID " + categoryId + " not found"));
         return mapCategoryToCategoryModel(category);
     }
 
-    // zamiast id mamy name
-    public CategoryModel updateCategory(CategoryModel categoryModel) {
+    public void updateCategory(CategoryModel categoryModel) {
         Category category = categoryRepository.findByName(categoryModel.getName());
         if (category == null) {
-            throw new IllegalArgumentException("Category with name " + categoryModel.getName() + " not found");
+            throw new EntityNotFoundException("Category with name " + categoryModel.getName() + " not found");
         }
 
         category.setName(categoryModel.getName());
-        Category updatedCategory = categoryRepository.save(category);
-        return mapCategoryToCategoryModel(updatedCategory);
+        categoryRepository.save(category);
     }
 
-
-    public void deleteCategory(Long categoryId) {
-        categoryRepository.deleteById(categoryId);
+    public void deleteCategory(Long id) {
+        categoryRepository.deleteById(id);
     }
 
     private CategoryModel mapCategoryToCategoryModel(Category category) {

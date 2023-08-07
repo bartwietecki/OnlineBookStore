@@ -7,4 +7,3 @@ public class RoleModel {
     private Long id;
     private String name;
 }
-

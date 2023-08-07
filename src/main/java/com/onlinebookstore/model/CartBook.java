@@ -1,7 +1,5 @@
 package com.onlinebookstore.model;
 
-import com.onlinebookstore.entity.Book;
-import com.onlinebookstore.model.BookModel;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -42,6 +40,4 @@ public class CartBook {
     public boolean idEquals(BookModel book) {
         return this.book.getId().equals(book.getId());
     }
-
 }
-
