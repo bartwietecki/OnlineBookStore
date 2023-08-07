@@ -49,12 +49,10 @@ public class AdminBookController {
     public String addBook(@ModelAttribute BookModel bookModel,
                           @RequestParam("categoryId") Long categoryId,
                           @RequestParam("authorId") Long authorId,
-                          @RequestParam("file") MultipartFile file) {
+                          @RequestParam("imageName") MultipartFile file) {
 
         bookModel.setImageName(file.getOriginalFilename());
-
         bookService.addBook(bookModel, categoryId, authorId, file);
-
         return "redirect:/admin/books";
     }
 
