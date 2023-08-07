@@ -147,8 +147,6 @@ public class BookService {
         bookRepository.deleteById(bookId);
     }
 
-    // TODO
-    // Finish saveBookImage() method
     private void saveBookImage(MultipartFile file) {
         Path uploads = Paths.get("./uploads");
         try {

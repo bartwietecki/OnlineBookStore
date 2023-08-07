@@ -8,7 +8,7 @@
 <body>
 <div class="container">
     <h1>Add Book</h1>
-    <form th:object="${bookModel}" th:action="@{/admin/books/save}" method="post">
+    <form th:object="${bookModel}" th:action="@{/admin/books/save}" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="title">Title:</label>
             <input type="text" id="title" name="title" class="form-control" th:field="*{title}">
@@ -23,8 +23,7 @@
         </div>
         <div class="form-group">
             <label for="imageName">Image Name:</label>
-            <input type="file" id="imageName" name="imageName" class="form-control" accept="image/*">
-<!--            th:field="*{imageName}-->
+            <input type="file" id="imageName" name="image" class="form-control" accept="image/*">
         </div>
         <div class="form-group">
             <label for="categoryId">Category:</label>

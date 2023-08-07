@@ -31,7 +31,6 @@
 
                 <a th:href="@{/books/details/{bookId}(bookId=${book.id})}">
                     <img th:src="@{/uploads/__${book.getImageName()}__}" class="responsive card-img-top product-image"/>
-                    <!--                    <img th:src="@{/uploads/__${book.getImageName()}__}" class="responsive"/>-->
                 </a>
                 <div class="card-body">
                     <h5 class="card-title" th:text="${book.title}">Product Title</h5>

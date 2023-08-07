@@ -45,14 +45,21 @@ public class AdminBookController {
         return "add-book-form";
     }
 
-    @PostMapping("/save")
-    public String addBook(@ModelAttribute BookModel bookModel,
-                          @RequestParam("categoryId") Long categoryId,
-                          @RequestParam("authorId") Long authorId,
-                          @RequestParam("imageName") MultipartFile file) {
+//    @PostMapping("/save")
+//    public String addBook(@ModelAttribute BookModel bookModel,
+//                          @RequestParam("categoryId") Long categoryId,
+//                          @RequestParam("authorId") Long authorId,
+//                          @RequestParam("imageName") MultipartFile file) {
+//
+//        bookModel.setImageName(file.getOriginalFilename());
+//        bookService.addBook(bookModel, categoryId, authorId, file);
+//        return "redirect:/admin/books";
+//    }
 
+    @PostMapping("/save")
+    public String addBook(@ModelAttribute BookModel bookModel, @RequestParam("image") MultipartFile file) {
         bookModel.setImageName(file.getOriginalFilename());
-        bookService.addBook(bookModel, categoryId, authorId, file);
+        bookService.addBook(bookModel, bookModel.getCategoryId(), bookModel.getAuthorId(), file);
         return "redirect:/admin/books";
     }
 
