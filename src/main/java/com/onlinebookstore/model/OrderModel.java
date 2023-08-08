@@ -27,7 +27,4 @@ public class OrderModel {
     private String homeNo;
     private BigDecimal price;
     private OrderStatus orderStatus;
-
-
-    private List<Book> books;
 }

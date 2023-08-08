@@ -34,6 +34,6 @@ public class Book {
     @JoinColumn(name = "author_id")
     private Author author;
 
-    @ManyToMany(mappedBy = "books")
+    @ManyToMany(mappedBy = "books", fetch = FetchType.LAZY)
     private List<Order> orders = new ArrayList<>();
 }
