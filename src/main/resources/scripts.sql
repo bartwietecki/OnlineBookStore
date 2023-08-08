@@ -253,6 +253,61 @@ VALUES ('Becoming',
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
         28.50, 'becoming.jpg', NOW(), 9, 26);
 
+INSERT INTO book_author (book_id, author_id)
+VALUES (1, 1);
+INSERT INTO book_author (book_id, author_id)
+VALUES (2, 2);
+INSERT INTO book_author (book_id, author_id)
+VALUES (3, 3);
+INSERT INTO book_author (book_id, author_id)
+VALUES (4, 4);
+INSERT INTO book_author (book_id, author_id)
+VALUES (5, 5);
+INSERT INTO book_author (book_id, author_id)
+VALUES (6, 6);
+INSERT INTO book_author (book_id, author_id)
+VALUES (7, 7);
+INSERT INTO book_author (book_id, author_id)
+VALUES (8, 8);
+INSERT INTO book_author (book_id, author_id)
+VALUES (9, 9);
+INSERT INTO book_author (book_id, author_id)
+VALUES (10, 10);
+INSERT INTO book_author (book_id, author_id)
+VALUES (11, 11);
+INSERT INTO book_author (book_id, author_id)
+VALUES (12, 10);
+INSERT INTO book_author (book_id, author_id)
+VALUES (13, 12);
+INSERT INTO book_author (book_id, author_id)
+VALUES (14, 13);
+INSERT INTO book_author (book_id, author_id)
+VALUES (15, 14);
+INSERT INTO book_author (book_id, author_id)
+VALUES (16, 15);
+INSERT INTO book_author (book_id, author_id)
+VALUES (17, 16);
+INSERT INTO book_author (book_id, author_id)
+VALUES (18, 17);
+INSERT INTO book_author (book_id, author_id)
+VALUES (19, 18);
+INSERT INTO book_author (book_id, author_id)
+VALUES (20, 19);
+INSERT INTO book_author (book_id, author_id)
+VALUES (21, 20);
+INSERT INTO book_author (book_id, author_id)
+VALUES (22, 21);
+INSERT INTO book_author (book_id, author_id)
+VALUES (23, 22);
+INSERT INTO book_author (book_id, author_id)
+VALUES (24, 23);
+INSERT INTO book_author (book_id, author_id)
+VALUES (25, 24);
+INSERT INTO book_author (book_id, author_id)
+VALUES (26, 25);
+INSERT INTO book_author (book_id, author_id)
+VALUES (27, 26);
+
 INSERT INTO role (id, name)
 VALUES (1, 'USER');
 INSERT INTO role (id, name)

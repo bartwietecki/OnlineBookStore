@@ -18,10 +18,9 @@ public class SecurityConfiguration {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req -> req
                         .requestMatchers("/books", "/books/**", "/uploads/**", "/cart/**",
-                                "/contact-us/**", "/register").permitAll()
+                                "/contact-us/**", "/register/**", "/order/**").permitAll()
                         .requestMatchers("/admin/**").hasAuthority("ADMIN")
                         .requestMatchers("/css/**").permitAll()
-                        .requestMatchers("/register-admin").permitAll()
                 )
 
                 .formLogin(form -> form
@@ -30,7 +29,7 @@ public class SecurityConfiguration {
                         .defaultSuccessUrl("/books", true)
                         .permitAll()
                 )
-                .logout(logout -> logout.logoutSuccessUrl("/books"));
+                .logout(logout -> logout.logoutSuccessUrl("/login"));
 
         return http.build();
     }
