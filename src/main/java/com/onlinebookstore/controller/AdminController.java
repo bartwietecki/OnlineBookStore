@@ -21,6 +21,7 @@ public class AdminController {
 //        return "admin-home";
 //    }
 
+    // method change because of , @Configuration Properites
     @GetMapping
     public String admin(Model model) {
         String username = adminConfiguration.getUsername();

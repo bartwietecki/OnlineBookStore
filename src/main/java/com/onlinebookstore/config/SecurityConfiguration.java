@@ -13,37 +13,23 @@ import org.springframework.stereotype.Component;
 @EnableWebSecurity
 public class SecurityConfiguration {
 
-//    @Bean
-//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//        http.csrf(AbstractHttpConfigurer::disable);
-//        http.authorizeHttpRequests(req -> req
-//                        .requestMatchers("/books", "/books/**", "/uploads/**", "/cart/**").permitAll()
-//                        .requestMatchers("/admin/**").hasAuthority("ADMIN"))
-//
-//
-//                .formLogin(form -> form.loginPage("/login").permitAll())
-//                .logout(logout -> logout.logoutSuccessUrl("/books"));
-//
-//
-//            .authorizeHttpRequests(req -> req
-//                .requestMatchers("/register-admin").permitAll());
-//
-//
-////        http.logout(logout -> logout.logoutSuccessUrl("/books"));
-//
-//        return http.build();
-//    }
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req -> req
-                        .requestMatchers("/books", "/books/**", "/uploads/**", "/cart/**", "/contact-us/**").permitAll()
+                        .requestMatchers("/books", "/books/**", "/uploads/**", "/cart/**",
+                                "/contact-us/**", "/register").permitAll()
                         .requestMatchers("/admin/**").hasAuthority("ADMIN")
                         .requestMatchers("/css/**").permitAll()
                         .requestMatchers("/register-admin").permitAll()
                 )
-                .formLogin(form -> form.loginPage("/login").permitAll())
+
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .loginProcessingUrl("/login")
+                        .defaultSuccessUrl("/books", true)
+                        .permitAll()
+                )
                 .logout(logout -> logout.logoutSuccessUrl("/books"));
 
         return http.build();

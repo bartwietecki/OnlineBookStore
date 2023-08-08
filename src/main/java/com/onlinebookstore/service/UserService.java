@@ -26,26 +26,6 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-//    public void registerNewUser(UserModel userModel) {
-//        if (userRepository.findByUsername(userModel.getUsername()) != null) {
-//            throw new IllegalArgumentException("Username is already taken");
-//        }
-//
-//        User user = new User();
-//        user.setUsername(userModel.getUsername());
-//        user.setPassword(userModel.getPassword());
-//        user.setEmail(userModel.getEmail());
-//
-//        Role defaultRole = roleRepository.findByName("USER")
-//                .orElseThrow(() -> new IllegalArgumentException("Default role not found in the database"));
-//        user.setRole(defaultRole);
-//
-//       String hashedPassword = passwordEncoder.encode(user.getPassword());
-//       user.setPassword(hashedPassword);
-//
-//        userRepository.save(user);
-//    }
-
     public void registerNewUser(UserModel userModel) {
         if (userRepository.findByUsername(userModel.getUsername()) != null) {
             throw new IllegalArgumentException("Username is already taken");
@@ -53,50 +33,14 @@ public class UserService {
 
         User user = new User();
         user.setUsername(userModel.getUsername());
-//        user.setPassword(userModel.getPassword());
-        user.setPassword(encodePassword(userModel.getPassword()));
         user.setEmail(userModel.getEmail());
 
         Role defaultRole = roleRepository.findById(1L)
                 .orElseThrow(() -> new IllegalArgumentException("Default role not found in the database"));
         user.setRole(defaultRole);
 
-        userRepository.save(user);
-    }
-
-//    public void registerNewAdmin(UserModel userModel) {
-//        if (userRepository.findByUsername(userModel.getUsername()) != null) {
-//            throw new IllegalArgumentException("Username is already taken");
-//        }
-//
-//        User user = new User();
-//        user.setUsername(userModel.getUsername());
-//        user.setPassword(userModel.getPassword());
-//        user.setEmail(userModel.getEmail());
-//
-//        Role adminRole = roleRepository.findByName("ADMIN")
-//                .orElseThrow(() -> new IllegalArgumentException("Admin role not found in the database"));
-//        user.setRole(adminRole);
-//
-//        String hashedPassword = passwordEncoder.encode(user.getPassword());
-//        user.setPassword(hashedPassword);
-//
-//        userRepository.save(user);
-//    }
-
-    public void registerNewAdmin(UserModel userModel) {
-        if (userRepository.findByUsername(userModel.getUsername()) != null) {
-            throw new IllegalArgumentException("Username is already taken");
-        }
-
-        User user = new User();
-        user.setUsername(userModel.getUsername());
-        user.setPassword(encodePassword(userModel.getPassword()));
-        user.setEmail(userModel.getEmail());
-
-        Role adminRole = roleRepository.findById(2L)
-                .orElseThrow(() -> new IllegalArgumentException("Admin role not found in the database"));
-        user.setRole(adminRole);
+        String hashedPassword = encodePassword(userModel.getPassword());
+        user.setPassword(hashedPassword);
 
         userRepository.save(user);
     }

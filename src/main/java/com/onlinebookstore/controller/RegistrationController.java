@@ -28,23 +28,4 @@ public class RegistrationController {
         userService.registerNewUser(userModel);
         return "redirect:/login";
     }
-
-
-
-
-
-
-
-
-    @GetMapping("/register-admin")
-    public String showAdminRegistrationForm(Model model) {
-        model.addAttribute("userModel", new UserModel());
-        return "admin-registration-form";
-    }
-
-    @PostMapping("/register-admin")
-    public String processAdminRegistrationForm(@ModelAttribute("userModel") UserModel userModel) {
-        userService.registerNewAdmin(userModel);
-        return "redirect:/register-admin";
-    }
 }
