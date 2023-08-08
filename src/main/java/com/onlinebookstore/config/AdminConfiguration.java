@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Data
 @Component
 @ConfigurationProperties(prefix = "admin")
-public class AdminConfig {
+public class AdminConfiguration {
 
     private String username;
     private String password;

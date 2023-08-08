@@ -9,6 +9,3 @@ public class UserModel {
     private String password;
     private String email;
 }
-
-//TODO
-// Bcrypt password

@@ -28,21 +28,23 @@ public class RegistrationController {
         userService.registerNewUser(userModel);
         return "redirect:/login";
     }
+
+
+
+
+
+
+
+
+    @GetMapping("/register-admin")
+    public String showAdminRegistrationForm(Model model) {
+        model.addAttribute("userModel", new UserModel());
+        return "admin-registration-form";
+    }
+
+    @PostMapping("/register-admin")
+    public String processAdminRegistrationForm(@ModelAttribute("userModel") UserModel userModel) {
+        userService.registerNewAdmin(userModel);
+        return "redirect:/register-admin";
+    }
 }
-//    @PostMapping("/register")
-//    public String processRegistrationForm(@ModelAttribute("userModel") UserModel userModel) {
-//        // Map UserModel to User entity
-//        User user = new User();
-//        user.setUsername(userModel.getUsername());
-//        user.setPassword(userModel.getPassword());
-//        user.setEmail(userModel.getEmail());
-//
-//        // Set default role (assuming the "USER" role exists in the database)
-//        Role defaultRole = new Role(); // Assuming Role entity has a constructor
-//        defaultRole.setId(1L); // Assuming the "USER" role has an ID of 1 in the database
-//        user.setRole(defaultRole);
-//
-//        userService.registerNewUser(user);
-//
-//        return "redirect:/login";
-//    }

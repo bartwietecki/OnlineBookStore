@@ -1,6 +1,6 @@
 package com.onlinebookstore.controller;
 
-import com.onlinebookstore.config.AdminConfig;
+import com.onlinebookstore.config.AdminConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin")
 public class AdminController {
 
-    private final AdminConfig adminConfig;
+    private final AdminConfiguration adminConfiguration;
 
-    public AdminController(AdminConfig adminConfig) {
-        this.adminConfig = adminConfig;
+    public AdminController(AdminConfiguration adminConfiguration) {
+        this.adminConfiguration = adminConfiguration;
     }
 
     //    @GetMapping
@@ -23,8 +23,8 @@ public class AdminController {
 
     @GetMapping
     public String admin(Model model) {
-        String username = adminConfig.getUsername();
-        String password = adminConfig.getPassword();
+        String username = adminConfiguration.getUsername();
+        String password = adminConfiguration.getPassword();
         model.addAttribute("adminUsername", username);
         model.addAttribute("adminPassword", password);
         return "admin-home";
