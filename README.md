@@ -12,7 +12,10 @@
  ## Additional admin functionalities (administration panel):
 • Managing authors (adding, updating and deleting authors)
 • Managing books (adding, updating and deleting books)
-• Managing categories (adding, updating and deleting categories)
-• Managing orders
+
+- Managing categories (adding, updating and deleting categories)
+  
+- Managing orders
+  
 • Managing users (admins have the authority to manage user accounts)
 • Viewing roles
