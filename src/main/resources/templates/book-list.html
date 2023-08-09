@@ -45,7 +45,7 @@
     </div>
 </div>
 
-<nav aria-label="Page navigation">
+<nav aria-label="Page navigation" th:if="${!pagedBooks.empty}">
     <ul class="pagination justify-content-center">
         <li class="page-item" th:classappend="${pagedBooks.first} ? disabled">
             <a class="page-link"

@@ -9,5 +9,4 @@ class OnlineBookStoreApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }
