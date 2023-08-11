@@ -87,10 +87,6 @@ public class BookService {
                 .map(this::mapBookToBookModel)
                 .collect(Collectors.toList());
 
-//        if (bookModels.isEmpty()) {
-//            throw new EntityNotFoundException("No books found for the keyword: " + keyword);
-//        }
-
         return new PageImpl<>(bookModels, pageable, bookPage.getTotalElements());
     }
 

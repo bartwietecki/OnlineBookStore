@@ -1,4 +1,4 @@
-package com.onlinebookstore.service.unit;
+package com.onlinebookstore.unit.service;
 
 import com.onlinebookstore.model.BookModel;
 import com.onlinebookstore.service.ShoppingCart;

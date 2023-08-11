@@ -1,4 +1,4 @@
-package com.onlinebookstore.service.unit;
+package com.onlinebookstore.unit.service;
 
 import com.onlinebookstore.entity.Category;
 import com.onlinebookstore.model.CategoryModel;

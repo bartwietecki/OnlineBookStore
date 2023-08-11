@@ -1,6 +1,5 @@
 package com.onlinebookstore.config;
 
-import lombok.AllArgsConstructor;
 import org.flywaydb.core.Flyway;
 import org.flywaydb.core.api.configuration.FluentConfiguration;
 import org.springframework.context.annotation.Bean;

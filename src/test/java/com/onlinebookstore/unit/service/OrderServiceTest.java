@@ -1,4 +1,4 @@
-package com.onlinebookstore.service.unit;
+package com.onlinebookstore.unit.service;
 
 import com.onlinebookstore.entity.Book;
 import com.onlinebookstore.entity.Order;
